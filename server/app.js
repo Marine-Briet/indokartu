@@ -8,4 +8,9 @@ app.get('/', (req, res) => {
     res.send('API IndoKartu est fonctionnelle');
 });
 
+
+const sequelize = require('./config/db.mysql');
+
+sequelize.authenticate().then(() => console.log('Connexion MySQL réussie !')).catch((error) => console.error('Erreur de connexion MySQL :', error));
+
 module.exports = app;
