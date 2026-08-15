@@ -10,7 +10,10 @@ app.get('/', (req, res) => {
 
 
 const sequelize = require('./config/db.mysql');
+const mongoose = require('./config/db.mongo');
 
-sequelize.authenticate().then(() => console.log('Connexion MySQL réussie !')).catch((error) => console.error('Erreur de connexion MySQL :', error));
+sequelize.authenticate()
+.then(() => console.log('Connexion MySQL réussie !'))
+.catch((error) => console.error('Erreur de connexion MySQL :', error));
 
 module.exports = app;
