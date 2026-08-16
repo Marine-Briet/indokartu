@@ -27,7 +27,7 @@ const getMotbyId = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: 'Erreur', error });
     }
-}
+};
 
 
 // CREATE : POST créer un mot
@@ -36,7 +36,10 @@ const createMot = async (req, res) => {
         const mot = await Mot.create(req.body);
         return res.status(201).json(mot);
     } catch (error) {
-        return res.status(500).json({ message: 'Erreur', error });
+        if (error.name === 'SequelizeValidationError') {
+            return res.status(400).json({ message: 'Données invalides', error });
+        }
+        return res.status(500).json({ message: 'Erreur serveur', error });
     }
 };
 
@@ -54,7 +57,10 @@ const updateMot = async (req, res) => {
             return res.status(404).json({ message: 'Mot non trouvé' });
         }
     } catch (error) {
-        return res.status(500).json({ message: 'Erreur', error });
+        if (error.name === 'SequelizeValidationError') {
+            return res.status(400).json({ message: 'Données invalides', error });
+        }
+        return res.status(500).json({ message: 'Erreur serveur', error });
     }
 };
 
