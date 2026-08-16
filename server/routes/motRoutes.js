@@ -1,3 +1,6 @@
+// Fichier pour gérer les routes liées aux mots
+// Importer dans index.js
+
 const express = require('express');
 const router = express.Router();
 
