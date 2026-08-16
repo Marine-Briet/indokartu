@@ -5,11 +5,11 @@ const Categorie = require('./categorie');
 const TypeGrammatical = require('./typeGrammatical');
 
 // Associations Mot <-> Categorie
-Mot.belongsTo(Categorie, { foreignKey: 'id_categ' });
+Mot.belongsTo(Categorie, { foreignKey: { name: 'id_categ', allowNull: false } });
 Categorie.hasMany(Mot, { foreignKey: 'id_categ' });
 
 //  Associations Mot <-> TypeGrammatical
-Mot.belongsTo(TypeGrammatical, { foreignKey: 'id_type' });
+Mot.belongsTo(TypeGrammatical, { foreignKey: { name: 'id_type', allowNull: false } });
 TypeGrammatical.hasMany(Mot, {foreignKey: 'id_type'});
 
 
