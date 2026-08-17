@@ -6,6 +6,7 @@ const Mot = require('./mot');
 const Categorie = require('./categorie');
 const TypeGrammatical = require('./typeGrammatical');
 
+
 // Associations Mot <-> Categorie
 Mot.belongsTo(Categorie, { foreignKey: { name: 'id_categ', allowNull: false } });
 Categorie.hasMany(Mot, { foreignKey: 'id_categ' });
