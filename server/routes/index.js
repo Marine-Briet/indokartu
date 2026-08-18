@@ -8,11 +8,14 @@ const categorieRoutes = require('./categorieRoutes');
 const typeGramRoutes = require('./typeGramRoutes');
 const authRoutes = require('./authRoutes');
 const utilisateurRoutes = require('./utilisateurRoutes');
+const sessionRoutes = require('./sessionRoutes');
+
 
 router.use('/mots', motRoutes);
 router.use('/categories', categorieRoutes);
 router.use('/types-grammaticaux', typeGramRoutes);
 router.use('/auth', authRoutes);
 router.use('/mes-infos', utilisateurRoutes);
+router.use('/sessions', sessionRoutes);
 
 module.exports = router;
