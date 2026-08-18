@@ -21,4 +21,15 @@ const checkJWT = async (req, res, next) => {
     }
 };
 
-module.exports = { checkJWT };
+const checkAdmin = (req, res, next) => {
+
+    if (req.decoded.est_admin === true) {
+        next ();
+    } else {
+        return res.status(403).json({ message: 'Non autorisé' });
+    }
+};
+
+
+
+module.exports = { checkJWT, checkAdmin };

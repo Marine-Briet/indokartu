@@ -3,14 +3,14 @@
 
 const express = require('express');
 const router = express.Router();
-const { checkJWT } = require('../middlewares/checkAuth');
+const { checkJWT, checkAdmin } = require('../middlewares/checkAuth');
 
 const categorieController = require('../controllers/categorieController');
 
 router.get('/', categorieController.getAllCategories);
 router.get('/:id_categ', categorieController.getCategorieById);
-router.post('/', checkJWT, categorieController.createCategorie);
-router.put('/:id_categ', checkJWT, categorieController.updateCategorie);
-router.delete('/:id_categ', checkJWT, categorieController.deleteCategorie);
+router.post('/', checkJWT, checkAdmin, categorieController.createCategorie);
+router.put('/:id_categ', checkJWT, checkAdmin, categorieController.updateCategorie);
+router.delete('/:id_categ', checkJWT, checkAdmin, categorieController.deleteCategorie);
 
 module.exports = router;
