@@ -1,5 +1,6 @@
 // Fichier regroupant les statistiques globales de résultats
 const Session = require('../models/session');
+const { Mot } = require('../models/index');
 
 
 const getStatistiques = async (req, res) => {
@@ -7,19 +8,19 @@ const getStatistiques = async (req, res) => {
 
 
     try {
-        // Nombre total de sessions effectuées par utilisateur
+        //1. Nombre total de sessions effectuées par utilisateur
 
         const sessions = await Session.find({id_utilisateur});
         const nombreTotalSession = sessions.length;
     
-        // Moyenne générale sur 20 (toutes sessions confondues)
-        // Cas "zéro session"
+        // 2. Moyenne générale sur 20 (toutes sessions confondues)
+        // 2.1 Cas "zéro session"
         
         if (nombreTotalSession === 0) {
             return res.status(200).json({ nombreTotalSession, moyenne: null });
         }
         
-        // Donne un tableau de notes individuelles (calcul des notes par session)
+        // 2.2 Donne un tableau de notes individuelles (calcul des notes par session)
         const notesSur20 = sessions.map(session => {
             const resultats = session.resultats;
             const nombreReussis = resultats.filter(r => r.est_reussi === true).length;
@@ -28,14 +29,34 @@ const getStatistiques = async (req, res) => {
             return noteDeCetteSession;
         });
 
-        // Calcul moyenne
+        // 2.3 Calcul moyenne
         let sommeDesNotes = 0;
         for (let i = 0; i < notesSur20.length; i++) {
             sommeDesNotes += notesSur20[i];
         }
         const moyenne = sommeDesNotes / notesSur20.length;
 
-        return res.status(200).json({nombreTotalSession, moyenne});
+        // 3. % de vocabulaire maîtrisé (ex: "X / n mots")
+
+        // 3.1 Mettre tous les résultats dans un même tableau
+        const tousLesResultats = sessions.flatMap(session => session.resultats);
+        
+        // 3.2 Compter le nb de réussite pour chaque id_mot
+        const compteurReussites = {};
+
+        tousLesResultats.forEach(resultat => {
+            if (resultat.est_reussi === true) {
+                compteurReussites[resultat.id_mot] = (compteurReussites[resultat.id_mot] || 0) + 1;
+            }
+        });
+
+        // 3.3 Compter combien de mots ont atteint le seuil de 10 (si >=10 --> mot maitrisé)
+        const nombreMotsMaitrises = Object.values(compteurReussites).filter(r => r >=10).length;
+
+        // 3.4 Récupérer nb total de mot (via MySQL)
+        const nombreTotalMotsBase = await Mot.count();
+
+        return res.status(200).json({nombreTotalSession, moyenne, nombreTotalMotsBase, nombreMotsMaitrises});
     
     } catch (error) {
         return res.status(500).json({ message: 'Erreur serveur', error });
@@ -44,7 +65,5 @@ const getStatistiques = async (req, res) => {
 
 
 module.exports = { getStatistiques };
-
-// % de vocabulaire maîtrisé (ex: "X / n mots")
 
 // Top 10 des mots redoutés
