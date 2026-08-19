@@ -8,6 +8,7 @@ const { checkJWT, checkAdmin } = require('../middlewares/checkAuth');
 const motController = require('../controllers/motController');
 
 router.get('/', motController.getAllMots);
+router.get('/aleatoire', motController.getMotsAleatoires);
 router.get('/:id_mot', motController.getMotbyId);
 router.post('/', checkJWT, checkAdmin, motController.createMot);
 router.put('/:id_mot', checkJWT, checkAdmin, motController.updateMot);
