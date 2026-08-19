@@ -34,7 +34,7 @@ const getStatistiques = async (req, res) => {
         for (let i = 0; i < notesSur20.length; i++) {
             sommeDesNotes += notesSur20[i];
         }
-        const moyenne = sommeDesNotes / notesSur20.length;
+        const moyenne = Math.round(sommeDesNotes / notesSur20.length);
 
         // 3. % de vocabulaire maîtrisé (ex: "X / n mots")
 
@@ -55,9 +55,32 @@ const getStatistiques = async (req, res) => {
 
         // 3.4 Récupérer nb total de mot (via MySQL)
         const nombreTotalMotsBase = await Mot.count();
+        
+        // 4. Top 10 des mots redoutés
+        // 4.1 Compter le nb d'échecs par id_mot
+        const compteurEchecs = {};
 
-        return res.status(200).json({nombreTotalSession, moyenne, nombreTotalMotsBase, nombreMotsMaitrises});
-    
+        tousLesResultats.forEach(resultat => {
+            if (resultat.est_reussi === false) {
+                compteurEchecs[resultat.id_mot] = (compteurEchecs[resultat.id_mot] || 0) + 1;
+            }
+        });
+
+        // 4.2 Transformer object en tableau, trier ordre décroissant et garder top 10
+        const top10MotsRedoutes = Object.entries(compteurEchecs)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10);
+
+        // 4.3 Convertir l'id_mot en mot
+        const top10MotsRedoutesDetailles = await Promise.all(
+            top10MotsRedoutes.map(async ([id_mot, nombreEchecs]) => {
+                const mot = await Mot.findByPk(id_mot);
+                return { racine: mot.racine, traduction: mot.traduction, nombreEchecs };
+            })
+        );
+
+        return res.status(200).json({nombreTotalSession, moyenne, nombreTotalMotsBase, nombreMotsMaitrises, top10MotsRedoutesDetailles });
+
     } catch (error) {
         return res.status(500).json({ message: 'Erreur serveur', error });
     }
@@ -66,4 +89,3 @@ const getStatistiques = async (req, res) => {
 
 module.exports = { getStatistiques };
 
-// Top 10 des mots redoutés
