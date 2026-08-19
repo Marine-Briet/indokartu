@@ -11,7 +11,10 @@ const createSession = async (req, res) => {
 
         if (resultats) {
             const nouvelleSession = await Session.create({id_utilisateur, resultats});
-            return res.status(201).json({message: 'La session est créée avec succès'});
+            const nombreReussis = resultats.filter(resultat => resultat.est_reussi === true).length;
+            const total = resultats.length;
+            
+            return res.status(201).json({message: 'La session est créée avec succès', nombreReussis, total});
         } else {
             return res.status(400).json({ message: 'Résultats manquants' });
         }

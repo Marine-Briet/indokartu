@@ -9,6 +9,7 @@ const typeGramRoutes = require('./typeGramRoutes');
 const authRoutes = require('./authRoutes');
 const utilisateurRoutes = require('./utilisateurRoutes');
 const sessionRoutes = require('./sessionRoutes');
+const statsRoutes = require('./statsRoutes');
 
 
 router.use('/mots', motRoutes);
@@ -17,5 +18,6 @@ router.use('/types-grammaticaux', typeGramRoutes);
 router.use('/auth', authRoutes);
 router.use('/mes-infos', utilisateurRoutes);
 router.use('/sessions', sessionRoutes);
+router.use('/mes-resultats', statsRoutes);
 
 module.exports = router;

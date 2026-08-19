@@ -1,4 +1,6 @@
 const { Mot } = require('../models/index');
+const { sequelize } = require('../models/index');
+const { Op } = require('sequelize');
 
 // READ : GET tous les mots
 
@@ -29,7 +31,54 @@ const getMotbyId = async (req, res) => {
     }
 };
 
+// READ : GET mots aléatoires 
 
+const getMotsAleatoires = async (req, res) => {
+    try {
+        const { nombre, categories, types } = req.query;
+        
+        // Transformer chaine de caractère en nombre (paramètre catégories)
+        
+        let categoriesArray = [];
+        if (categories) {
+            categoriesArray = categories.split(',').map(Number);
+        }
+        
+        // Ajouter la condition
+        const conditionsWhere = {};
+
+        if (categoriesArray.length > 0) {
+            conditionsWhere.id_categ = { [Op.in]: categoriesArray };
+        }
+
+        // Transformer chaine de caractère en nombre (paramètre types)
+        
+        let typesArray = [];
+        if (types) {
+            typesArray = types.split(',').map(Number);
+        }
+
+        // Ajouter la condition
+
+        if (typesArray.length > 0) {
+            conditionsWhere.id_type = { [Op.in]: typesArray };
+        }
+
+        // Pour avoir un tirage aléatoire
+        const mots = await Mot.findAll ({
+            where: conditionsWhere, // Pour appliquer filtre catégories et types
+            order: sequelize.random(), // trier aléatoirement à chaque exécution de la requête
+            limit: Number (nombre) // Pour limiter au nombre de cartes choisies (converti en nomrbe)
+        });
+
+        return res.status(200).json(mots);
+    } catch (error) {
+        return res.status(500).json({message: 'Erreur server', error});
+    }
+
+};
+
+ 
 // CREATE : POST créer un mot
 const createMot = async (req, res) => {
     try {
@@ -82,4 +131,4 @@ const deleteMot = async (req, res) => {
     }
 };
 
-module.exports = { getAllMots, getMotbyId, createMot, updateMot, deleteMot };
+module.exports = { getAllMots, getMotbyId, getMotsAleatoires, createMot, updateMot, deleteMot };
