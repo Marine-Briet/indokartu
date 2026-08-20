@@ -1,7 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Accueil from './pages/Accueil';
-import AdminCategTyp from './pages/AdminCategTyp';
-import AdminVocabulaire from './pages/AdminVocabulaire';
+import Admin from './pages/Admin';
 import CartesFiltres from './pages/CartesFiltres';
 import CartesSession from './pages/CartesSession';
 import TableauDeBord from './pages/TableauDeBord';
@@ -33,8 +32,7 @@ function App() {
         <Route path="/mes-infos" element={<MesInfos />} />
       </Route>
       <Route element={<AdminRoute />}>
-        <Route path="/admin-categ-typ" element={<AdminCategTyp />} />
-        <Route path="/admin-vocabulaire" element={<AdminVocabulaire />} />
+        <Route path="/admin" element={<Admin />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -1,22 +1,25 @@
 import Card from "../components/Card";
-import Bouton from "../components/Bouton";
-import TagCategorie from '../components/TagCategorie';
+import Header from "../components/Header";
 
 function Accueil() {
     return(
-    <Card>
-        <h1>Accueil</h1>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-    </Card>
+    <div>
+        <Header />
+        <Card>
+            <h1>Accueil</h1>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </Card>
+    </div>
+
 )};
 
 export default Accueil;
