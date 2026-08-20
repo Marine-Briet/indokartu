@@ -18,4 +18,4 @@ function Bouton({ children, onClick, type = "button", variant = "cta", actif = t
   );
 }
 
-export default Bouton;
+export default Bouton; 
