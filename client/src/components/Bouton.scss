@@ -1,0 +1,25 @@
+@use '../styles/variables' as *;
+
+.bouton {
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.bouton--cta {
+    background-color: $c-accent;
+    color: $c-text-white;
+    border: 1px solid $c-accent;
+}
+
+.bouton--filtre-actif {
+    background-color: rgba($c-accent, 0.1);
+    color: $c-accent;
+    border: 1px solid $c-accent;
+}
+
+.bouton--filtre-inactif {
+    background-color: $c-fond-classique;
+    color: $c-texte-secondaire;
+    border: 1px solid $c-bordure-classique;
+}
