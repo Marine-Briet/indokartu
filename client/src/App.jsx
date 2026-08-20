@@ -15,6 +15,7 @@ import NotFound from './pages/NotFound';
 import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from './routes/PrivateRoute';
 
+
 function App() {
   return (
     <BrowserRouter>
