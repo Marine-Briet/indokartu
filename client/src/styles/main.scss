@@ -15,3 +15,46 @@ body {
     color: $c-texte-principal;
     overflow-y: scroll;
 }
+
+.page-centree {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; // pour occuper l'espace sous le Header
+}
+
+// SCSS spé au formulaire :
+.carte-formulaire {
+    max-width: 450px;
+    width: 100%;
+    padding:20px 70px;
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.mdp-aide {
+    font-size: 0.6rem;
+    color: $c-texte-secondaire;
+    font-style: italic;
+    width: 100%; 
+    margin-top: -15px; // pour le rapprocher visuellement du champ juste au-dessus
+    text-align: left
+}
+
+.lien-secondaire {
+    font-size: 0.7rem;
+    color: $c-texte-secondaire;
+    text-align: center;
+}
+
+.lien-secondaire a {
+    color: $c-accent;
+    font-weight: 600;
+    text-decoration: none;
+}

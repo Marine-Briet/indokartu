@@ -1,7 +1,7 @@
 import './Card.scss';
 
-function Card({children}) {
-    return <div className="card">{children}</div>;
+function Card({children, className = ""}) {
+    return <div className={`card ${className}`}>{children}</div>;
 }
 
 export default Card;

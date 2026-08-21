@@ -3,27 +3,31 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 
-function Header() {
+function Header({ simple = false}) {
   const [menuOuvert, setMenuOuvert] = useState(false);
 
   return (
     <header className="header">
-        <p>Indokartu</p>
+        <p>IndoKartu</p>
 
-        <nav className={menuOuvert ? "menu menu--ouvert" : "menu"}>
-            <button className="btn-fermer" onClick={() => setMenuOuvert(false)}>✕</button>
-            <NavLink to="/tableau-de-bord">Tableau de bord</NavLink>
-            <NavLink to="/cartes-filtres">Cartes</NavLink>
-            <NavLink to="/vocabulaire">Vocabulaire</NavLink>
-            <NavLink to="/mes-resultats">Mes résultats</NavLink>
-            <NavLink to="/mes-infos">Mes infos</NavLink>
-            <NavLink to="/admin">Gérer les données</NavLink>
-        </nav>
+        {!simple && (
+          <>
+            <nav className={menuOuvert ? "menu menu--ouvert" : "menu"}>
+                <button className="btn-fermer" onClick={() => setMenuOuvert(false)}>✕</button>
+                <NavLink to="/tableau-de-bord">Tableau de bord</NavLink>
+                <NavLink to="/cartes-filtres">Cartes</NavLink>
+                <NavLink to="/vocabulaire">Vocabulaire</NavLink>
+                <NavLink to="/mes-resultats">Mes résultats</NavLink>
+                <NavLink to="/mes-infos">Mes infos</NavLink>
+                <NavLink to="/admin">Gérer les données</NavLink>
+            </nav>
 
-        <div className="header__droite">
-            <button className="btn-burger" onClick={() => setMenuOuvert(!menuOuvert)}>☰</button>
-            <button className="btn-deconnexion">Déconnexion</button>
-        </div>
+            <div className="header__droite">
+                <button className="btn-burger" onClick={() => setMenuOuvert(!menuOuvert)}>☰</button>
+                <button className="btn-deconnexion">Déconnexion</button>
+            </div>
+          </>
+        )}
     </header>
   );
 }
