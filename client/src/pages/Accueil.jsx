@@ -1,5 +1,25 @@
+import Card from "../components/Card";
+import Header from "../components/Header";
+
 function Accueil() {
-    return <h1>Accueil</h1>
-};
+    return(
+    <div>
+        <Header />
+        <Card>
+            <h1>Accueil</h1>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </Card>
+    </div>
+
+)};
 
 export default Accueil;
