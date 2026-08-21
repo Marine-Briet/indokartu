@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
+const cors = require('cors');
 
 // Import les routes
 const indexRoutes = require('./routes/index');
@@ -9,7 +10,10 @@ const indexRoutes = require('./routes/index');
 // Import une instance de l'app
 const app = express();
 
-// Middleware pour parser le corps des requêtes en JSON
+// Cors
+app.use(cors());
+
+// Middleware pour passer le corps des requêtes en JSON
 app.use(express.json());
 
 // Import BDD MySQL et MongoDB
