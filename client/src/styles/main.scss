@@ -2,16 +2,75 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+// Styles communs à toutes les pages ou à plusieurs pages en même temps
 
 * {
     margin: 0; 
     padding: 0;
     box-sizing: border-box;
     font-family: $font-principal;
-
 }
 
 body {
     background-color: $c-fond;
     color: $c-texte-principal;
+    overflow-y: scroll;
+}
+
+.page-centree {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; // pour occuper l'espace sous le Header
+}
+
+// SCSS spé au formulaire :
+.carte-formulaire {
+    max-width: 450px;
+    width: 100%;
+    padding:20px 70px;
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.mdp-aide {
+    font-size: 0.6rem;
+    color: $c-texte-secondaire;
+    font-style: italic;
+    width: 100%; 
+    margin-top: -15px; // pour le rapprocher visuellement du champ juste au-dessus
+    text-align: left
+}
+
+.lien-secondaire {
+    font-size: 0.7rem;
+    color: $c-texte-secondaire;
+    text-align: center;
+}
+
+.lien-secondaire a {
+    color: $c-accent;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+// SCSS pour page d'inscription et connexion
+.message-formulaire {
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.message-formulaire--succes {
+    color: #4CAF50;
+}
+
+.message-formulaire--erreur {
+    color: #D9534F;
 }

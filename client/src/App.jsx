@@ -1,7 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Accueil from './pages/Accueil';
-import AdminCategTyp from './pages/AdminCategTyp';
-import AdminVocabulaire from './pages/AdminVocabulaire';
+import Admin from './pages/Admin';
 import CartesFiltres from './pages/CartesFiltres';
 import CartesSession from './pages/CartesSession';
 import TableauDeBord from './pages/TableauDeBord';
@@ -14,15 +13,17 @@ import Vocabulaire from './pages/Vocabulaire';
 import NotFound from './pages/NotFound';
 import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from './routes/PrivateRoute';
-
+import PublicRoute from './routes/PublicRoute';
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Accueil />} />
-      <Route path="/connexion" element={<Connexion />} />
-      <Route path="/inscription" element={<Inscription />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/inscription" element={<Inscription />} />
+      </Route>
       <Route element={<PrivateRoute />}>
         <Route path="/cartes-filtres" element={<CartesFiltres />} />
         <Route path="/cartes-session" element={<CartesSession />} />
@@ -33,8 +34,7 @@ function App() {
         <Route path="/mes-infos" element={<MesInfos />} />
       </Route>
       <Route element={<AdminRoute />}>
-        <Route path="/admin-categ-typ" element={<AdminCategTyp />} />
-        <Route path="/admin-vocabulaire" element={<AdminVocabulaire />} />
+        <Route path="/admin" element={<Admin />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
