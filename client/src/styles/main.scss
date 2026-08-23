@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+// Styles communs à toutes les pages ou à plusieurs pages en même temps
 
 * {
     margin: 0; 
@@ -57,4 +58,19 @@ body {
     color: $c-accent;
     font-weight: 600;
     text-decoration: none;
+}
+
+// SCSS pour page d'inscription et connexion
+.message-formulaire {
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.message-formulaire--succes {
+    color: #4CAF50;
+}
+
+.message-formulaire--erreur {
+    color: #D9534F;
 }

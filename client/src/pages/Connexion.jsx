@@ -9,11 +9,13 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Connexion.scss';
 
+
 function Connexion() {
     const navigate = useNavigate();
     const { setUser } = useAuth();
     const [email, setEmail] = useState("");
     const [motDePasse, setMotDePasse] = useState("");
+    const [message, setMessage] = useState({texte: "", type: ""});
     
     async function gererConnexion(e) {
         e.preventDefault();
@@ -31,9 +33,10 @@ function Connexion() {
             localStorage.setItem("token", donnees.token);
             const decodage = jwtDecode(donnees.token);
             setUser({ id_utilisateur: decodage.id_utilisateur, est_admin: decodage.est_admin });
-            navigate("/tableau-de-bord");   
+            setMessage({texte: "Connexion réussie! Redirection...", type: "succes"});
+            navigate("/tableau-de-bord");
         } else {
-            console.log("Erreur :", donnees.message);
+            setMessage({ texte: "Email ou mot de passe incorrect", type: "erreur"});
         }
     }
 
@@ -47,6 +50,11 @@ function Connexion() {
                             <h1 className="titre-formulaire-connexion">Connexion</h1>
                             <Champ label="Votre adresse mail" type="email" valeur={email} onChange={(e) => setEmail(e.target.value)} placeholder="votre adresse mail..." />
                             <Champ label="Votre mot de passe" type="password" valeur={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} placeholder="votre mot de passe..." />
+                            {message.texte && (
+                                <p className={`message-formulaire message-formulaire--${message.type}`}>
+                                    {message.texte}
+                                </p>
+                            )}
                             <Bouton type="submit">JE ME CONNECTE</Bouton>
                             <p className="lien-secondaire">Pas de compte ? <NavLink to="/inscription">Inscrivez-vous</NavLink></p>
                         </div>
