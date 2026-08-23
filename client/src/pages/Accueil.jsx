@@ -4,7 +4,7 @@ import Header from "../components/Header";
 function Accueil() {
     return(
     <div>
-        <Header />
+        <Header simple />
         <Card>
             <h1>Accueil</h1>
             <br />

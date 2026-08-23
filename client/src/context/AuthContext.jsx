@@ -16,8 +16,14 @@ export function AuthProvider({ children }) {
     setChargement(false);
   }, []);
 
+
+  function deconnexion() {
+    localStorage.removeItem("token");
+    setUser(null);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, setUser, chargement }}>
+    <AuthContext.Provider value={{ user, setUser, chargement, deconnexion }}>
       {children}
     </AuthContext.Provider>
   ); 
@@ -26,5 +32,6 @@ export function AuthProvider({ children }) {
 export function useAuth() {
     return useContext(AuthContext);
 }
+
 
 export default AuthContext;

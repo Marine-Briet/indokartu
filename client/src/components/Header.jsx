@@ -1,10 +1,20 @@
 import './Header.scss';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 
 function Header({ simple = false}) {
   const [menuOuvert, setMenuOuvert] = useState(false);
+  const {deconnexion} = useAuth();
+  const navigate = useNavigate();;
+
+  function gererDeconnexion() {
+    deconnexion();
+    navigate("/");
+  }
+  
 
   return (
     <header className="header">
@@ -24,7 +34,7 @@ function Header({ simple = false}) {
 
             <div className="header__droite">
                 <button className="btn-burger" onClick={() => setMenuOuvert(!menuOuvert)}>☰</button>
-                <button className="btn-deconnexion">Déconnexion</button>
+                <button className="btn-deconnexion" onClick={gererDeconnexion}>Déconnexion</button>
             </div>
           </>
         )}

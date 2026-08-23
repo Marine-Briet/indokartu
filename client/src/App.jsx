@@ -13,15 +13,17 @@ import Vocabulaire from './pages/Vocabulaire';
 import NotFound from './pages/NotFound';
 import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from './routes/PrivateRoute';
-
+import PublicRoute from './routes/PublicRoute';
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Accueil />} />
-      <Route path="/connexion" element={<Connexion />} />
-      <Route path="/inscription" element={<Inscription />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/inscription" element={<Inscription />} />
+      </Route>
       <Route element={<PrivateRoute />}>
         <Route path="/cartes-filtres" element={<CartesFiltres />} />
         <Route path="/cartes-session" element={<CartesSession />} />
