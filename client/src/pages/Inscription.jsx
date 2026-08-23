@@ -13,9 +13,15 @@ function Inscription() {
     const [motDePasse, setMotDePasse] = useState("");
     const navigate = useNavigate();
     const [message, setMessage] = useState({texte: "", type: ""});
-    
+    const regexMotDePasse = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
     async function gererInscription(e) {
         e.preventDefault();
+
+        if (!regexMotDePasse.test(motDePasse)) {
+            setMessage({ texte: "Le mot de passe ne respecte pas les règles demandées", type: "erreur" });
+            return;
+        }
 
         const reponse = await fetch("http://localhost:3000/api/auth/inscription", {
             method: "POST",
@@ -35,7 +41,6 @@ function Inscription() {
     }
 
 
-
     return (
         <div className="container">
             <Header simple/>
@@ -46,7 +51,7 @@ function Inscription() {
                             <h1 className="titre-formulaire-inscription">Inscription</h1>
                             <Champ label="Inscrire votre adresse mail" type="email" valeur={email} onChange={(e) => setEmail(e.target.value)} placeholder="votre adresse mail..." />
                             <Champ label="Créez un mot de passe" type="password" valeur={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} placeholder="votre mot de passe..." />
-                            <p className="mdp-aide">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (ex: !?#)</p>
+                            <p className="mdp-aide">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (ex: !@#$%^&*)</p>
                             {message.texte && (
                                 <p className={`message-formulaire message-formulaire--${message.type}`}>
                                     {message.texte}
