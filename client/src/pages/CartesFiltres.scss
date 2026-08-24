@@ -1,0 +1,29 @@
+@use '../styles/variables' as *;
+
+.filtres-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section-filtre,
+.section-nombre {
+    margin-bottom: 10px;
+}
+
+.section-orientation{
+   margin-bottom: 20px; 
+}
+
+
+.choix-orientation,
+.choix-nombre {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.page-contenu > .bouton--cta {
+    display: block;
+    margin: 20px auto 40px auto;
+}

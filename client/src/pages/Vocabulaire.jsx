@@ -42,10 +42,6 @@ function Vocabulaire() {
 
     },[]);
 
-    console.log(mots);
-    console.log(categories);
-    console.log(types);
-
     // --- FILTRAGE : calcule la liste finale de mots à afficher, à chaque re-render ---
     // Règles combinées : recherche texte (racine OU traduction) + filtre type + filtre catégorie
     // + rien ne s'affiche tant qu'aucune recherche ni aucun filtre n'est actif
@@ -71,9 +67,9 @@ function Vocabulaire() {
     // --- TOGGLE FILTRES : ajoute/retire un id du tableau de sélection au clic ---
     function toggleType(id) {
         if (typesSelectionnes.includes(id)) {
-            setTypesSelectionnes(typesSelectionnes.filter((t) => t !== id)); // retire
+            setTypesSelectionnes(typesSelectionnes.filter((t) => t !== id));
         } else {
-            setTypesSelectionnes([...typesSelectionnes, id]); // ajoute
+            setTypesSelectionnes([...typesSelectionnes, id]);
         }
     }
 
@@ -95,7 +91,7 @@ function Vocabulaire() {
     }
 
     function toutSelectionnerCategories() {
-        setCategoriesSelectionnees(categories.map((cat) => cat.id_categ)); // ⚠️ corrigé : categories.map, pas types.map
+        setCategoriesSelectionnees(categories.map((cat) => cat.id_categ));
     }
 
     function toutDeselectionnerCategories() {
