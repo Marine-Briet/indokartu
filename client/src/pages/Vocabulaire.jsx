@@ -7,13 +7,17 @@ import Bouton from "../components/Bouton"
 
 
 function Vocabulaire() {
+    // --- ÉTATS : données venant de l'API ---
     const [mots, setMots] = useState([]);
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
-    const [recherche, setRecherche] = useState("");
-    const [typesSelectionnes, setTypesSelectionnes] = useState([]);
-    const [categoriesSelectionnees, setCategoriesSelectionnees] = useState([]);
 
+    // --- ÉTATS : recherche et filtres sélectionnés par l'utilisateur ---
+    const [recherche, setRecherche] = useState("");
+    const [typesSelectionnes, setTypesSelectionnes] = useState([]); // tableau d'id_type
+    const [categoriesSelectionnees, setCategoriesSelectionnees] = useState([]); // tableau d'id_categ
+
+    // --- CHARGEMENT INITIAL : les 3 appels API, une seule fois au montage du composant ---
     useEffect(() => {
         async function chargerMots() {
             const reponse = await fetch ("http://localhost:3000/api/mots");
@@ -42,6 +46,9 @@ function Vocabulaire() {
     console.log(categories);
     console.log(types);
 
+    // --- FILTRAGE : calcule la liste finale de mots à afficher, à chaque re-render ---
+    // Règles combinées : recherche texte (racine OU traduction) + filtre type + filtre catégorie
+    // + rien ne s'affiche tant qu'aucune recherche ni aucun filtre n'est actif
     const motsFiltres = mots.filter((mot) => {
         const correspondRecherche = 
             mot.racine.toLowerCase().includes(recherche.toLowerCase()) ||
@@ -53,15 +60,20 @@ function Vocabulaire() {
         const correspondCategorie = 
             categoriesSelectionnees.length === 0 || categoriesSelectionnees.includes(mot.id_categ);
 
+        // Au moins UNE action (recherche tapée OU filtre type OU filtre catégorie) doit exister,
+        // sinon on n'affiche rien par défaut
         const auMoinsUneAction =
             recherche.trim() !== "" || typesSelectionnes.length > 0 || categoriesSelectionnees.length > 0;
-        return auMoinsUneAction && correspondRecherche && correspondType && correspondCategorie;    });
 
+        return auMoinsUneAction && correspondRecherche && correspondType && correspondCategorie;
+    });
+
+    // --- TOGGLE FILTRES : ajoute/retire un id du tableau de sélection au clic ---
     function toggleType(id) {
         if (typesSelectionnes.includes(id)) {
-            setTypesSelectionnes(typesSelectionnes.filter((t) => t !== id));
+            setTypesSelectionnes(typesSelectionnes.filter((t) => t !== id)); // retire
         } else {
-            setTypesSelectionnes([...typesSelectionnes, id]);
+            setTypesSelectionnes([...typesSelectionnes, id]); // ajoute
         }
     }
 
@@ -73,6 +85,7 @@ function Vocabulaire() {
         }
     }
 
+    // --- TOUT SÉLECTIONNER / DÉSÉLECTIONNER : remplit ou vide le tableau de sélection ---
     function toutSelectionnerTypes() {
         setTypesSelectionnes(types.map((t) => t.id_type));
     }
@@ -82,7 +95,7 @@ function Vocabulaire() {
     }
 
     function toutSelectionnerCategories() {
-        setCategoriesSelectionnees(types.map((t) => t.id_type));
+        setCategoriesSelectionnees(categories.map((cat) => cat.id_categ)); // ⚠️ corrigé : categories.map, pas types.map
     }
 
     function toutDeselectionnerCategories() {
@@ -94,9 +107,13 @@ function Vocabulaire() {
             <Header />
             <div className="page-contenu">
                 <h1>Vocabulaire</h1>
+
+                {/* --- BARRE DE RECHERCHE --- */}
                 <div>
                     <input className="barre-recherche" type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} placeholder="Recherche un mot en français ou indonésien..." />
                 </div>
+
+                {/* --- FILTRES TYPES GRAMMATICAUX --- */}
                 <div className="section-filtre">
                     <div className="entete-section">
                         <p className="instruction-filtre">Choisir un type grammatical (ou plusieurs) :</p>
@@ -113,6 +130,7 @@ function Vocabulaire() {
                     ))}
                 </div>
                 
+                {/* --- FILTRES CATÉGORIES --- */}
                 <div className="section-filtre">
                     <div className="entete-section">
                         <p className="instruction-filtre">Choisir une catégorie (ou plusieurs) :</p>
@@ -135,14 +153,17 @@ function Vocabulaire() {
                     ))}
                 </div>
                 
+                {/* --- COMPTEUR + LISTE DES MOTS FILTRÉS --- */}
                 <p className="compteur-mots">{motsFiltres.length} mot{motsFiltres.length > 1 ? "s" : ""} affiché{motsFiltres.length > 1 ? "s" : ""}</p>
                 <div>
                     {motsFiltres.map((mot) => {
+                        // Croisement des id_categ / id_type du mot avec les vraies infos (nom, couleur)
                         const categorie = categories.find((cat) => cat.id_categ === mot.id_categ);
                         const type = types.find((t) => t.id_type === mot.id_type);
 
                         return (
                             <Card key={mot.id_mot} className="carte-mot">
+                                {/* Ligne 1 : racine + badge type + tag catégorie */}
                                 <div className="mot-ligne">
                                     <p className="mot-label">racine</p>
                                     <div className="mot-entete">
@@ -154,6 +175,7 @@ function Vocabulaire() {
                                     </div>
                                 </div>
 
+                                {/* Ligne 2 : formes (uniquement si le mot en a) */}
                                 {mot.forme && (
                                     <div className="mot-ligne">
                                         <p className="mot-label">forme</p>
@@ -165,6 +187,7 @@ function Vocabulaire() {
                                     </div>
                                 )}
 
+                                {/* Ligne 3 : traduction */}
                                 <div className="mot-ligne">
                                     <p className="mot-label">traduction</p>
                                     <p className="mot-traduction">{mot.traduction}</p>
