@@ -8,11 +8,11 @@
     background: none;
     border: none;
     color: $c-accent;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-decoration: underline;
     cursor: pointer;
     align-self: flex-start;
-    padding: 0;
+    margin-bottom: 8px;
 }
 
 .modal-text {
@@ -20,7 +20,6 @@
     font-style: normal;
     font-size: small;
 }
-
 
 
 .modal-overlay {
