@@ -1,5 +1,55 @@
 @use '../styles/variables' as *;
 
+
+.barre-recherche {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid $c-bordure-classique;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.instruction-filtre {
+    font-family: $font-principal;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: $c-texte-principal;
+    margin-bottom: 10px;
+}
+
+.filtres-types,
+.filtres-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.tout-selectionner {
+    font-size: 0.8rem;
+    color: $c-accent;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.entete-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.compteur-mots {
+    font-size: 0.85rem;
+    color: $c-texte-secondaire;
+    margin-bottom: 15px;
+}
+
+// Bloc cartes
+
 .carte-mot {
     padding: 16px 20px;
     margin-bottom: 15px;

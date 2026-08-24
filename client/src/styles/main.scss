@@ -24,6 +24,19 @@ body {
   min-height: 80vh; // pour occuper l'espace sous le Header
 }
 
+.page-contenu {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    font-family: $font-principal;
+    font-size: 3rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
 // SCSS spé au formulaire :
 .carte-formulaire {
     max-width: 450px;

@@ -24,3 +24,10 @@
     color: $c-texte-secondaire;
     border: 1px solid $c-bordure-classique;
 }
+
+.bouton--filtre-categorie {
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 20px;
+}

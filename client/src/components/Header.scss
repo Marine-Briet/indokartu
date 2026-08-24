@@ -74,6 +74,7 @@ p {
     background-color: rgba($c-accent, 0.1);
     color: $c-accent;
     border: 1px solid $c-accent;
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
