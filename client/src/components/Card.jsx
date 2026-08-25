@@ -1,7 +1,7 @@
 import './Card.scss';
 
-function Card({children, className = ""}) {
-    return <div className={`card ${className}`}>{children}</div>;
+function Card({ children, className = "", onClick }) {
+    return <div className={`card ${className}`} onClick={onClick}>{children}</div>;
 }
 
 export default Card;

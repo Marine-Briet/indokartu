@@ -1,0 +1,175 @@
+@use '../styles/variables' as *;
+
+// EN TETE
+
+.entete-session {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.lien-retour {
+    color: $c-texte-secondaire;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.compteur-carte {
+    color: $c-texte-secondaire;
+    font-size: 0.9rem;
+}
+
+// GLOBAL CARD
+
+.carte-flashcard {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    overflow-y: auto;
+}
+
+.carte-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+// CARTE RECTO
+
+.carte-recto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.recto-contenu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+}
+
+.bloc-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.drapeau-langue {
+    font-family: $font-secondaire;
+    font-style: italic;
+    color: $c-texte-secondaire;
+    font-size: 1.1rem;
+}
+
+.mot-affiche {
+    font-family: $font-secondaire;
+    font-style: normal;
+    font-size: 1.8rem;
+    color: $c-texte-principal;
+}
+
+.instruction-carte {
+    font-size: 0.85rem;
+    color: $c-texte-secondaire;
+    font-style: italic;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+
+// CARD VERSO :
+
+.carte-verso {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.verso-contenu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+.drapeaux-ligne-indo, .drapeaux-ligne-fr {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+    justify-content: center;
+}
+
+.drapeaux-ligne-fr {
+    margin-top: 30px;
+}
+
+.drapeau {
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.mot-racine {
+    color: $c-accent;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.mot-traduction {
+    font-size: 0.8rem;
+    font-family: $font-principal;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.bloc-langue {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+// BOUTON 
+
+.boutons-reponse {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.boutons-reponse button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid $c-bordure-classique;
+    background: none;
+    cursor: pointer;
+}
+
+.boutons-reponse button:first-child {
+    color: #D9534F;
+    border-color: #D9534F;
+}
+
+.boutons-reponse button:last-child {
+    color: #4CAF50;
+    border-color: #4CAF50;
+}

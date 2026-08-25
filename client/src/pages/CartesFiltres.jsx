@@ -14,8 +14,10 @@ function CartesFiltres() {
     const { categoriesSelectionnees, setCategoriesSelectionnees, 
         typesSelectionnes, setTypesSelectionnes, 
         orientation, setOrientation, 
-        nombreCartes, setNombreCartes 
-    } = useSession();
+        nombreCartes, setNombreCartes,
+        setMotsSession,
+        setResultatsSession 
+        } = useSession();
     const navigate = useNavigate();
     const [erreur, setErreur] = useState("");
     const [mots, setMots] = useState([]);
@@ -95,6 +97,13 @@ function CartesFiltres() {
             setErreur("Sélectionne au moins un type et une catégorie pour commencer.");
             return;
         }
+
+        const motsMelanges = [...motsCorrespondants].sort(() => Math.random() - 0.5);
+        const nombreATirer = nombreCartes === "toutes" ? motsMelanges.length : nombreCartes;
+        const motsTires = motsMelanges.slice(0, nombreATirer);
+
+        setMotsSession(motsTires);
+        setResultatsSession([]); //repartir d'une liste de résultats vide pour cette nouvelle session
         navigate("/cartes-session");
     }
 

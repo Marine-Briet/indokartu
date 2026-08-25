@@ -8,7 +8,7 @@ import Inscription from './pages/Inscription';
 import Connexion from './pages/Connexion';
 import MesInfos from './pages/MesInfos';
 import MesResultats from './pages/MesResultats';
-import ResultatSession from './pages/ResultatSession';
+import ResultatsSession from './pages/ResultatsSession';
 import Vocabulaire from './pages/Vocabulaire';
 import NotFound from './pages/NotFound';
 import AdminRoute from './routes/AdminRoute';
@@ -29,7 +29,7 @@ function App() {
         <Route element={<SessionProvider />}>
           <Route path="/cartes-filtres" element={<CartesFiltres />} />
           <Route path="/cartes-session" element={<CartesSession />} />
-          <Route path="/resultat-session" element={<ResultatSession />} />
+          <Route path="/resultats-session" element={<ResultatsSession />} />
         </Route>
         <Route path="/tableau-de-bord" element={<TableauDeBord />} />
         <Route path="/mes-resultats" element={<MesResultats />} />
