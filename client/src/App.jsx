@@ -8,12 +8,13 @@ import Inscription from './pages/Inscription';
 import Connexion from './pages/Connexion';
 import MesInfos from './pages/MesInfos';
 import MesResultats from './pages/MesResultats';
-import ResultatSession from './pages/ResultatSession';
+import ResultatsSession from './pages/ResultatsSession';
 import Vocabulaire from './pages/Vocabulaire';
 import NotFound from './pages/NotFound';
 import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
+import { SessionProvider } from './context/SessionContext';
 
 function App() {
   return (
@@ -25,11 +26,13 @@ function App() {
         <Route path="/inscription" element={<Inscription />} />
       </Route>
       <Route element={<PrivateRoute />}>
-        <Route path="/cartes-filtres" element={<CartesFiltres />} />
-        <Route path="/cartes-session" element={<CartesSession />} />
+        <Route element={<SessionProvider />}>
+          <Route path="/cartes-filtres" element={<CartesFiltres />} />
+          <Route path="/cartes-session" element={<CartesSession />} />
+          <Route path="/resultats-session" element={<ResultatsSession />} />
+        </Route>
         <Route path="/tableau-de-bord" element={<TableauDeBord />} />
         <Route path="/mes-resultats" element={<MesResultats />} />
-        <Route path="/resultat-session" element={<ResultatSession />} />
         <Route path="/vocabulaire" element={<Vocabulaire />} />
         <Route path="/mes-infos" element={<MesInfos />} />
       </Route>

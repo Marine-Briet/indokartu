@@ -24,3 +24,36 @@
     color: $c-texte-secondaire;
     border: 1px solid $c-bordure-classique;
 }
+
+.bouton--filtre-categorie {
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+.bouton--ligne-categorie-actif,
+.bouton--ligne-categorie-inactif {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid;
+    border-radius: 12px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.checkbox-visuelle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}

@@ -24,6 +24,27 @@ body {
   min-height: 80vh; // pour occuper l'espace sous le Header
 }
 
+.page-contenu {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-flashcard {
+    max-width: 450px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px 20px;
+}
+
+h1 {
+    font-family: $font-principal;
+    font-size: 3rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+
 // SCSS spé au formulaire :
 .carte-formulaire {
     max-width: 450px;
@@ -73,4 +94,66 @@ body {
 
 .message-formulaire--erreur {
     color: #D9534F;
+}
+
+
+// Bloc carte : pour Vocabulaire et Card verso
+
+
+.badge-type {
+    background-color: $c-fond;
+    border: 1px solid $c-bordure-classique;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $c-texte-secondaire;
+}
+
+.mot-ligne {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mot-racine {
+    font-family: $font-principal;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: $c-texte-principal;
+}
+
+.mot-formes {
+    font-family: $font-principal;
+    font-weight:400;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+.mot-traduction {
+    font-family: $font-principal;
+    font-size:1rem;
+    font-style: italic;
+    color: $c-texte-secondaire;
+}
+
+.mot-label {
+    flex-shrink: 0;
+    width: 70px; // largeur fixe pour que tous les labels s'alignent verticalement entre eux
+    font-family: $font-principal;
+    font-style: normal;
+    font-size: 0.6rem;
+    color: $c-texte-principal;
+}
+
+.tag-forme {
+    background-color: $c-fond;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $c-texte-secondaire;
 }
