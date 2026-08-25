@@ -1,0 +1,65 @@
+@use '../styles/variables' as *;
+
+.carte-resultat {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-session {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: $c-texte-principal;
+}
+
+.boutons-resultat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 200px;
+    margin: 0 auto 25px auto;
+}
+
+.boutons-resultat .bouton {
+    width: 100%;
+}
+
+.details-liste {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    gap: 10px 40px;
+    background: $c-fond-classique;
+    border-radius: 20px;
+    border: 2px solid $c-bordure-classique;
+}
+
+.details-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: $font-secondaire;
+    font-style: italic;
+    color: $c-texte-principal;
+}
+
+.bouton-details-actif {
+    background-color: $c-fond-classique !important;
+    color: $c-texte-secondaire !important;
+    border: 1px solid $c-bordure-classique;
+}
+
+.icone-reussi {
+    color: #4CAF50;
+    font-weight: 900;
+}
+
+.icone-rate {
+    color: #D9534F;
+    font-weight: 900;
+}

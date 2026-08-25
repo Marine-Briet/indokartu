@@ -1,7 +1,7 @@
 import { hexToRgba } from '../utils/colors';
 import './Bouton.scss';
 
-function Bouton({ children, onClick, type = "button", variant = "cta", actif = true, couleur }) {
+function Bouton({ children, onClick, type = "button", variant = "cta", actif = true, couleur, className="" }) {
     let classeBouton;
     let styleInline = {};
 
@@ -24,7 +24,7 @@ function Bouton({ children, onClick, type = "button", variant = "cta", actif = t
     }
 
   return (
-    <button type={type} onClick={onClick} className={classeBouton} style={styleInline}>
+    <button type={type} onClick={onClick} className={`${classeBouton} ${className}`} style={styleInline}>
       {variant === "ligne-categorie" && (
         <span className="checkbox-visuelle" style={{ backgroundColor: actif ? couleur : "transparent", borderColor: actif ? couleur : "#ccc" }}>
           {actif && "✓"}
