@@ -1,0 +1,92 @@
+@use '../styles/variables' as *;
+
+.cartes-stats-duo {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+.carte-stat {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.stat-label {
+    font-family: $font-secondaire;
+    font-style: italic;
+    color: $c-texte-principal;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-bottom: 8px;
+}
+
+.stat-valeur {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: $c-accent;
+}
+
+.carte-maitrise {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.titre-matrise {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: $c-accent;
+    margin-bottom: 8px;
+    margin-left: 8px;
+}
+
+.sous-titre-maitrise {
+    font-size: 0.7rem;
+    font-family: $font-principal;
+    color: $c-texte-secondaire;
+    text-align: right;
+    margin-left: 8px;
+}
+
+.titre-top10 {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: $c-accent;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.liste-top10 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.liste-top10 p {
+    font-family: $font-principal;
+    font-style: italic;
+    color: $c-texte-principal;
+    font-size: 1rem;
+    
+}
+
+.lien-aide {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: 1px solid $c-bordure-classique;
+    border-radius: 50%;
+    text-decoration: none;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    color: $c-texte-secondaire;
+    cursor: pointer;
+}
