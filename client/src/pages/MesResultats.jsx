@@ -56,7 +56,7 @@ function MesResultats() {
                     <Card className="carte-stat">
                         <p className="stat-label">Moyenne générale : </p>
                         <p className="stat-valeur">{stats.moyenne}/20</p>
-                        <button type="button" className="lien-aide" onClick={() => setAideMoyenneOuvert(!aideMoyenneOuvert)}>
+                        <button type="button" className="bouton-aide-rond" onClick={() => setAideMoyenneOuvert(!aideMoyenneOuvert)}>
                             ?
                         </button>
                         {aideMoyenneOuvert  && (
@@ -73,7 +73,7 @@ function MesResultats() {
                 <Card className="carte-maitrise">
                     <p className="titre-matrise">{Math.round((stats.nombreMotsMaitrises / stats.nombreTotalMotsBase) * 100)}% du vocabulaire maîtrisé !</p>
                     <p className="sous-titre-maitrise">Tu as donc appris {stats.nombreMotsMaitrises} mots sur un total de {stats.nombreTotalMotsBase} mots</p>
-                    <button type="button" className="lien-aide" onClick={() => setAideMaitriseOuvert(!aideMaitriseOuvert)}>
+                    <button type="button" className="bouton-aide-rond" onClick={() => setAideMaitriseOuvert(!aideMaitriseOuvert)}>
                         ?
                     </button>
                     {aideMaitriseOuvert && (

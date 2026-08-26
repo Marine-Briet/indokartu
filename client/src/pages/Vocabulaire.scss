@@ -59,6 +59,13 @@
     gap: 12px;
 }
 
+.carte-mot {
+    transition: border-color 0.2s ease;
+}
+
+.carte-mot:hover {
+    border-color: $c-accent;
+}
 
 .mot-entete {
     flex: 1;

@@ -104,8 +104,8 @@ function CartesSession() {
             </div>
 
             {/* Le clic ne retourne la carte QUE si elle est encore au recto (sinon rien ne se passe) */}
-            <Card className="carte-flashcard" onClick={!carteRetournee ? () => setCarteRetournee(true) : undefined}>
-
+            <Card className="carte-flashcard" couleurBordure={categorieActuelle?.couleur_categ} onClick={!carteRetournee ? () => setCarteRetournee(true) : undefined}>
+                <div className="kawung-pattern"></div>
                 {/* Badges (type + catégorie)*/}
                 {!carteRetournee && (
                     <div className="carte-badges">

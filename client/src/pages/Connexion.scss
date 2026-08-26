@@ -14,3 +14,7 @@
     align-self: flex-start;
     margin-bottom: 8px;
 }
+
+.lien-aide:hover {
+    color: darken($c-accent, 10%);
+}

@@ -1,5 +1,6 @@
 @use '../styles/variables' as *;
 
+
 // EN TETE
 
 .entete-session {
@@ -26,6 +27,7 @@
     width: 100%;
     max-width: 350px;
     aspect-ratio: 1 / 1;
+    position: relative;
     margin: 0 auto;
     padding: 10px 10px;
     display: flex;
@@ -39,6 +41,15 @@
     gap: 8px;
     margin-bottom: 20px;
     justify-content: center;
+}
+
+.kawung-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 8px, #B8801F 8px, #B8801F 9px, transparent 9px);
+  background-size: 42px 42px;
 }
 
 // CARTE RECTO
@@ -118,7 +129,7 @@
 }
 
 .drapeaux-ligne-fr {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .drapeau {
@@ -126,10 +137,32 @@
     flex-shrink: 0;
 }
 
-.mot-racine {
+.carte-verso .mot-racine {
     color: $c-accent;
     font-size: 1.3rem;
     font-weight: 800;
+}
+
+.carte-verso .mot-label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+    color: $c-texte-secondaire;
+}
+
+.carte-verso .mot-ligne {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.carte-verso .mot-entete {
+    justify-content: center;
+}
+
+.carte-verso .mot-formes {
+    justify-content: center;
 }
 
 .mot-traduction {
@@ -150,26 +183,34 @@
 .boutons-reponse {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 22px;
     margin-top: 20px;
 }
 
 .boutons-reponse button {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    border-radius: 12px;
-    border: 2px solid $c-bordure-classique;
-    background: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    font-size: 1.6rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease;
 }
 
 .boutons-reponse button:first-child {
-    color: #D9534F;
-    border-color: #D9534F;
+    background-color: #FCEBEB;
+    border: 2px solid #E24B4A;
+    color: #A32D2D;
 }
 
 .boutons-reponse button:last-child {
-    color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #EAF3DE;
+    border: 2px solid #639922;
+    color: #3B6D11;
+}
+
+.boutons-reponse button:hover {
+    transform: scale(1.08);
 }

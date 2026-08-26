@@ -1,6 +1,6 @@
 @use '../styles/variables' as *;
 
-.filtres-categories {
+.filtres-categories-lignes {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -12,7 +12,8 @@
 }
 
 .section-orientation{
-   margin-bottom: 20px; 
+    margin-top: 20px;
+    margin-bottom: 20px; 
 }
 
 

@@ -53,6 +53,10 @@ p {
     
 }
 
+.menu a:hover {
+    color: $c-accent;
+}
+
 .menu--ouvert {
     transform: translateX(0);
 }

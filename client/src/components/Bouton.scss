@@ -13,16 +13,28 @@
     border: 1px solid $c-accent;
 }
 
+.bouton--cta:hover {
+    background-color: darken($c-accent, 8%);
+}
+
 .bouton--filtre-actif {
     background-color: rgba($c-accent, 0.1);
     color: $c-accent;
     border: 1px solid $c-accent;
 }
 
+.bouton--filtre-actif:hover {
+    background-color: rgba($c-accent, 0.2);
+}
+
 .bouton--filtre-inactif {
     background-color: $c-fond-classique;
     color: $c-texte-secondaire;
     border: 1px solid $c-bordure-classique;
+}
+
+.bouton--filtre-inactif:hover {
+    border-color: $c-accent;
 }
 
 .bouton--filtre-categorie {
@@ -43,6 +55,11 @@
     border-radius: 12px;
     font-weight: 800;
     text-align: left;
+}
+
+.bouton--ligne-categorie-actif:hover,
+.bouton--ligne-categorie-inactif:hover {
+    filter: brightness(0.97);
 }
 
 .checkbox-visuelle {
