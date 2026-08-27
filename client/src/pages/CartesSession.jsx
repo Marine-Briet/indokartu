@@ -52,32 +52,32 @@ function CartesSession() {
           }
         : {};
 
-    async function repondre(reussi) {
-        const resultatCompletSession = [...resultatsSession, { id_mot: motActuel.id_mot, racine: motActuel.racine, reussi: reussi }];
-        setResultatsSession(resultatCompletSession);
+        async function repondre(reussi) {
+            const resultatCompletSession = [...resultatsSession, { id_mot: motActuel.id_mot, racine: motActuel.racine, reussi: reussi }];
+            setResultatsSession(resultatCompletSession);
 
-        const estLaDerniereCarte = indexActuel === motsSession.length - 1;
+            const estLaDerniereCarte = indexActuel === motsSession.length - 1;
 
-        if (estLaDerniereCarte) {
-            const resultatsFormates = resultatCompletSession.map((resultat) => ({
-                id_mot: resultat.id_mot,
-                est_reussi: resultat.reussi
-            }));
-            const token = localStorage.getItem("token");
-            await fetch("http://localhost:3000/api/sessions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({ resultats: resultatsFormates })
-            });
-            navigate("/resultats-session");
-        } else {
-            setIndexActuel(indexActuel + 1);
-            setCarteRetournee(false);
+            if (estLaDerniereCarte) {
+                const resultatsFormates = resultatCompletSession.map((resultat) => ({
+                    id_mot: resultat.id_mot,
+                    est_reussi: resultat.reussi
+                }));
+                const token = localStorage.getItem("token");
+                await fetch("http://localhost:3000/api/sessions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ resultats: resultatsFormates })
+                });
+                navigate("/resultats-session");
+            } else {
+                setIndexActuel(indexActuel + 1);
+                setCarteRetournee(false);
+            }
         }
-    }
 
     return (
         <div>
