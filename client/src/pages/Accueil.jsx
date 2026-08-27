@@ -1,25 +1,65 @@
-import Card from "../components/Card";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import Bouton from "../components/Bouton";
+import { useNavigate } from "react-router-dom";
+import "./Accueil.scss";
 
 function Accueil() {
-    return(
-    <div>
-        <Header />
-        <Card>
-            <h1>Accueil</h1>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </Card>
-    </div>
+    const navigate = useNavigate();
+    const [nombreMots, setNombreMots] = useState(0);
+    const [nombreCategories, setNombreCategories] = useState(0);
 
-)};
+    useEffect(() => {
+        async function chargerMots() {
+            const reponse = await fetch("http://localhost:3000/api/mots");
+            const donnees = await reponse.json();
+            setNombreMots(donnees.length);
+        }
+
+        async function chargerCategories() {
+            const reponse = await fetch("http://localhost:3000/api/categories");
+            const donnees = await reponse.json();
+            setNombreCategories(donnees.length);
+        }
+
+        chargerMots();
+        chargerCategories();
+    }, []);
+
+    return (
+        <div>
+            <div className="page-accueil">
+                <div className="pile-cartes">
+                    <div className="carte-mystere carte-mystere--gauche">?</div>
+                    <div className="carte-mystere carte-mystere--droite">?</div>
+                    <div className="carte-vedette">
+                        <p className="drapeau-carte-vedette">🇮🇩 en indonésien</p>
+                        <p className="mot-carte-vedette">makan</p>
+                    </div>
+                </div>
+
+                <p className="titre-accueil">IndoKartu</p>
+                <p className="accroche-accueil">Apprends le vocabulaire indonésien, une carte à la fois.</p>
+
+                <div className="chiffres-accueil">
+                    <div className="chiffre-bloc">
+                        <p className="chiffre-valeur">{nombreMots}</p>
+                        <p className="chiffre-label">mots</p>
+                    </div>
+                    <div className="chiffre-separateur"></div>
+                    <div className="chiffre-bloc">
+                        <p className="chiffre-valeur">{nombreCategories}</p>
+                        <p className="chiffre-label">thèmes</p>
+                    </div>
+                </div>
+
+                <div className="boutons-accueil">
+                    <Bouton variant="cta" onClick={() => navigate("/connexion")}>Se connecter</Bouton>
+                    <Bouton variant="cta" onClick={() => navigate("/inscription")}>S'inscrire</Bouton>
+                </div>
+            </div>
+        </div>
+    )
+};
 
 export default Accueil;

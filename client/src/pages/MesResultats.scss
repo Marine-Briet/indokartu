@@ -95,3 +95,23 @@
     border-color: $c-accent;
     color: $c-accent;
 }
+
+// SI AUCUNE SESSION
+
+.carte-aucune-session {
+    text-align: center;
+    padding: 40px 25px;
+}
+
+.texte-aucune-session {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: $c-texte-principal;
+    margin-bottom: 20px;
+}
+
+.carte-aucune-session .bouton--cta {
+    display: block;
+    margin: 0 auto;
+}

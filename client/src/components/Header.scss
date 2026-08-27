@@ -15,10 +15,13 @@
     gap: 15px;
 }
 
-p {
+.logo-header {
     font-family: $font-secondaire;
+    color: $c-texte-principal;
     font-style: italic;
+    font-weight: bold;
     font-size: 2rem;
+    cursor: pointer;
 }
 
 .btn-burger {
@@ -80,6 +83,10 @@ p {
     color: $c-accent;
     border: 1px solid $c-accent;
     cursor: pointer;
+}
+
+.btn-deconnexion:hover {
+    background-color: white;
 }
 
 @media (min-width: 768px) {

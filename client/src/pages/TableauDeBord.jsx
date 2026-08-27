@@ -1,10 +1,12 @@
 import Header from "../components/Header";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./TableauDeBord.scss"
 
 function TableauDeBord() {
     const navigate = useNavigate();
+    const { user } = useAuth();
     
     function obtenirSalutation() {
         const heure = new Date().getHours();
@@ -48,6 +50,15 @@ function TableauDeBord() {
                         <p className="sous-titre-carte-nav">Suivre ta progression</p>
                     </div>
                 </Card>
+                {user?.est_admin && (
+                    <Card className="carte-navigation" onClick={() => navigate("/admin")}>
+                        <div className="icone-carte-nav icone-admin">⚙️</div>
+                        <div>
+                            <p className="titre-carte-nav">Gérer les données</p>
+                            <p className="sous-titre-carte-nav">Mots, catégories, types</p>
+                        </div>
+                    </Card>
+                )}
             </div>
         </div>
 )};

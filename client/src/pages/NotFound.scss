@@ -1,0 +1,25 @@
+@use '../styles/variables' as *;
+
+.page-404 {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+.chiffre-404 {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 5rem;
+    color: $c-accent;
+}
+
+.texte-404 {
+    font-size: 1rem;
+    color: $c-texte-secondaire;
+    margin-bottom: 10px;
+}

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header"
 import Card from "../components/Card";
+import Bouton from "../components/Bouton";
 import "./MesResultats.scss"
 
 
@@ -8,6 +10,7 @@ function MesResultats() {
     const [stats, setStats] = useState(null);
     const [aideMoyenneOuvert, setAideMoyenneOuvert] = useState(false);
     const [aideMaitriseOuvert, setAideMaitriseOuvert] = useState(false);
+    const navigate = useNavigate();
     
     useEffect(() => {
         async function chargerStats() {
@@ -30,17 +33,19 @@ function MesResultats() {
     }
 
     if (!stats.moyenne) {
-        
-        return (
-            <div>
-                <Header />
-                <div className="page-contenu">
-                    <h1>Mes résultats</h1>
-                    <p>Tu n'as pas encore fait de session, commence à réviser !</p>
-                </div>
+    return (
+        <div>
+            <Header />
+            <div className="page-contenu">
+                <h1>Mes résultats</h1>
+                <Card className="carte-aucune-session">
+                    <p className="texte-aucune-session">Tu n'as pas encore fait de session, commence à réviser !</p>
+                    <Bouton variant="cta" onClick={() => navigate("/cartes-filtres")}>Commencer une session</Bouton>
+                </Card>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
     return (
         <div>
