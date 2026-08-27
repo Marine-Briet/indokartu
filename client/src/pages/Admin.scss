@@ -26,6 +26,11 @@
 
 .card-admin {
     margin-bottom: 12px;
+    transition: border-color 0.2s ease;
+}
+
+.card-admin:hover {
+    border-color: $c-accent;
 }
 
 .ligne-admin {
@@ -76,6 +81,20 @@
     border: 1px solid #F0997B;
     color: #D85A30;
 }
+
+.bouton-ajouter:hover {
+    background-color: darken($c-accent, 8%);
+}
+
+.bouton-modifier:hover {
+    border-color: $c-accent;
+    color: $c-accent;
+}
+
+.bouton-supprimer:hover {
+    background-color: rgba(216, 89, 48, 0.1);
+}
+
 
 .bouton-ajouter {
     background-color: $c-accent;
