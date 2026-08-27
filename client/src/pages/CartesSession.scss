@@ -23,17 +23,41 @@
 
 // GLOBAL CARD
 
-.carte-flashcard {
+.flip-container {
+    perspective: 1200px;
+}
+
+.flip-carte {
+    position: relative;
     width: 100%;
     max-width: 350px;
     aspect-ratio: 1 / 1;
-    position: relative;
     margin: 0 auto;
-    padding: 10px 10px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.flip-carte.retournee {
+    transform: rotateY(180deg);
+}
+
+.face-recto,
+.face-verso {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: $c-fond-classique;
+    border: 2px solid $c-bordure-classique;
+    border-radius: 20px;
+    padding: 25px 20px;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    overflow-y: auto;
+    overflow: hidden;
+}
+
+.face-verso {
+    transform: rotateY(180deg);
 }
 
 .carte-badges {
@@ -102,16 +126,10 @@
     font-style: italic;
     margin-top: auto;
     padding-top: 20px;
+    text-align: center;
 }
-
 
 // CARD VERSO :
-
-.carte-verso {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
 
 .verso-contenu {
     flex: 1;
@@ -137,31 +155,31 @@
     flex-shrink: 0;
 }
 
-.carte-verso .mot-racine {
+.face-verso .mot-racine {
     color: $c-accent;
     font-size: 1.3rem;
     font-weight: 800;
 }
 
-.carte-verso .mot-label {
+.face-verso .mot-label {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.7rem;
     color: $c-texte-secondaire;
 }
 
-.carte-verso .mot-ligne {
+.face-verso .mot-ligne {
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 4px;
 }
 
-.carte-verso .mot-entete {
+.face-verso .mot-entete {
     justify-content: center;
 }
 
-.carte-verso .mot-formes {
+.face-verso .mot-formes {
     justify-content: center;
 }
 
