@@ -2,11 +2,10 @@
 
 .header {
     background-color: $c-fond;
-    padding: 20px 10px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;  
 }
 
 .header__droite {
@@ -15,10 +14,13 @@
     gap: 15px;
 }
 
-p {
+.logo-header {
     font-family: $font-secondaire;
+    color: $c-texte-principal;
     font-style: italic;
+    font-weight: bold;
     font-size: 2rem;
+    cursor: pointer;
 }
 
 .btn-burger {
@@ -26,30 +28,34 @@ p {
     border: none;
     font-size: 2rem;
     background: none;
-    border: none;
     cursor: pointer;
 }
 
+// --- Menu mobile : caché par défaut, glisse depuis la droite ---
 .menu {
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
-    width: 250px;
+    width: 100%;
     background-color: $c-fond;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    padding: 30px 20px; 
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    z-index: 999; // passe au-dessus du contenu de la page (ex: cartes avec position:relative)
 }
 
 .menu a {
     color: $c-texte-principal;
     font-weight: 600;
     text-decoration: none;
-    
+}
+
+.menu a:hover {
+    color: $c-accent;
 }
 
 .menu--ouvert {
@@ -77,6 +83,11 @@ p {
     cursor: pointer;
 }
 
+.btn-deconnexion:hover {
+    background-color: white;
+}
+
+// --- Desktop : menu horizontal, toujours visible ---
 @media (min-width: 768px) {
     .header {
         display: grid;
@@ -95,7 +106,7 @@ p {
         height: auto;
         flex-direction: row;
     }
-    
+
     .btn-fermer {
         display: none;
     }

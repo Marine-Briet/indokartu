@@ -48,21 +48,27 @@ function Vocabulaire() {
     const motsFiltres = mots.filter((mot) => {
         const correspondRecherche = 
             mot.racine.toLowerCase().includes(recherche.toLowerCase()) ||
-            mot.traduction.toLowerCase().includes(recherche.toLowerCase());
+            mot.traduction.toLowerCase().includes(recherche.toLowerCase())
+        ;
 
         const correspondType = 
-            typesSelectionnes.length === 0 || typesSelectionnes.includes(mot.id_type);
+            typesSelectionnes.length === 0 || typesSelectionnes.includes(mot.id_type)
+        ;
 
         const correspondCategorie = 
-            categoriesSelectionnees.length === 0 || categoriesSelectionnees.includes(mot.id_categ);
+            categoriesSelectionnees.length === 0 || categoriesSelectionnees.includes(mot.id_categ)
+        ;
 
         // Au moins UNE action (recherche tapée OU filtre type OU filtre catégorie) doit exister,
         // sinon on n'affiche rien par défaut
         const auMoinsUneAction =
-            recherche.trim() !== "" || typesSelectionnes.length > 0 || categoriesSelectionnees.length > 0;
+            recherche.trim() !== "" || typesSelectionnes.length > 0 || categoriesSelectionnees.length > 0
+        ;
 
         return auMoinsUneAction && correspondRecherche && correspondType && correspondCategorie;
-    });
+    })
+    .sort((a, b) => a.racine.localeCompare(b.racine));
+
 
     // --- TOGGLE FILTRES : ajoute/retire un id du tableau de sélection au clic ---
     function toggleType(id) {

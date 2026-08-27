@@ -1,0 +1,117 @@
+@use '../styles/variables' as *;
+
+// --- 2 cartes côte à côte : nombre de sessions / moyenne ---
+.cartes-stats-duo {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+.carte-stat {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.stat-label {
+    font-family: $font-secondaire;
+    font-style: italic;
+    color: $c-texte-principal;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-bottom: 8px;
+}
+
+.stat-valeur {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: $c-accent;
+}
+
+// --- Carte % de vocabulaire maîtrisé ---
+.carte-maitrise {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.titre-matrise {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: $c-accent;
+    margin-bottom: 8px;
+    margin-left: 8px;
+}
+
+.sous-titre-maitrise {
+    font-size: 0.7rem;
+    color: $c-texte-secondaire;
+    text-align: right;
+    margin-left: 8px;
+}
+
+// --- TOP 10 des mots redoutés ---
+.titre-top10 {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: $c-accent;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.liste-top10 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.liste-top10 p {
+    font-family: $font-principal;
+    font-style: italic;
+    color: $c-texte-principal;
+    font-size: 1rem;
+}
+
+// --- Bouton "?" rond, pour les bulles d'aide ---
+.bouton-aide-rond {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: 1px solid $c-bordure-classique;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    color: $c-texte-secondaire;
+    cursor: pointer;
+}
+
+.bouton-aide-rond:hover {
+    border-color: $c-accent;
+    color: $c-accent;
+}
+
+// --- Cas "aucune session réalisée" ---
+.carte-aucune-session {
+    text-align: center;
+    padding: 40px 25px;
+}
+
+.texte-aucune-session {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: $c-texte-principal;
+    margin-bottom: 20px;
+}
+
+.carte-aucune-session .bouton--cta {
+    display: block;
+    margin: 0 auto;
+}

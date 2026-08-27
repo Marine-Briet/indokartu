@@ -16,6 +16,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
 import { SessionProvider } from './context/SessionContext';
 
+
 function App() {
   return (
     <BrowserRouter>

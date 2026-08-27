@@ -17,6 +17,7 @@
     color: $c-texte-principal;
 }
 
+// --- Boutons Recommencer / Changer de mots / Détails ---
 .boutons-resultat {
     display: flex;
     flex-direction: column;
@@ -29,6 +30,13 @@
     width: 100%;
 }
 
+.bouton-details-actif {
+    background-color: $c-fond-classique !important;
+    color: $c-texte-secondaire !important;
+    border: 1px solid $c-bordure-classique;
+}
+
+// --- Liste détaillée en 2 colonnes ---
 .details-liste {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -46,12 +54,6 @@
     font-family: $font-secondaire;
     font-style: italic;
     color: $c-texte-principal;
-}
-
-.bouton-details-actif {
-    background-color: $c-fond-classique !important;
-    color: $c-texte-secondaire !important;
-    border: 1px solid $c-bordure-classique;
 }
 
 .icone-reussi {

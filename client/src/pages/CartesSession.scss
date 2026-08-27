@@ -1,7 +1,6 @@
 @use '../styles/variables' as *;
 
-// EN TETE
-
+// --- En-tête : retour aux filtres + progression ---
 .entete-session {
     display: flex;
     justify-content: space-between;
@@ -20,18 +19,42 @@
     font-size: 0.9rem;
 }
 
-// GLOBAL CARD
+// --- Structure du flip 3D ---
+.flip-container {
+    perspective: 1200px;
+}
 
-.carte-flashcard {
+.flip-carte {
+    position: relative;
     width: 100%;
     max-width: 350px;
     aspect-ratio: 1 / 1;
     margin: 0 auto;
-    padding: 10px 10px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.flip-carte.retournee {
+    transform: rotateY(180deg);
+}
+
+.face-recto,
+.face-verso {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: $c-fond-classique;
+    border: 2px solid $c-bordure-classique;
+    border-radius: 20px;
+    padding: 25px 20px;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    overflow-y: auto;
+    overflow: hidden;
+}
+
+.face-verso {
+    transform: rotateY(180deg);
 }
 
 .carte-badges {
@@ -41,8 +64,16 @@
     justify-content: center;
 }
 
-// CARTE RECTO
+.kawung-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 8px, #B8801F 8px, #B8801F 9px, transparent 9px);
+    background-size: 42px 42px;
+}
 
+// --- Recto : mot à deviner ---
 .carte-recto {
     flex: 1;
     display: flex;
@@ -64,13 +95,6 @@
     gap: 15px;
 }
 
-.bloc-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-}
-
 .drapeau-langue {
     font-family: $font-secondaire;
     font-style: italic;
@@ -80,7 +104,6 @@
 
 .mot-affiche {
     font-family: $font-secondaire;
-    font-style: normal;
     font-size: 1.8rem;
     color: $c-texte-principal;
 }
@@ -91,17 +114,10 @@
     font-style: italic;
     margin-top: auto;
     padding-top: 20px;
+    text-align: center;
 }
 
-
-// CARD VERSO :
-
-.carte-verso {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
+// --- Verso : détail du mot (racine, forme, traduction), centré ---
 .verso-contenu {
     flex: 1;
     display: flex;
@@ -110,7 +126,8 @@
     gap: 12px;
 }
 
-.drapeaux-ligne-indo, .drapeaux-ligne-fr {
+.drapeaux-ligne-indo,
+.drapeaux-ligne-fr {
     display: flex;
     gap: 15px;
     margin-bottom: 5px;
@@ -118,7 +135,7 @@
 }
 
 .drapeaux-ligne-fr {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .drapeau {
@@ -126,50 +143,67 @@
     flex-shrink: 0;
 }
 
-.mot-racine {
+// Surcharges spécifiques au verso (le reste vient de main.scss : .mot-ligne, .mot-label, .mot-formes...)
+.face-verso .mot-racine {
     color: $c-accent;
     font-size: 1.3rem;
     font-weight: 800;
 }
 
-.mot-traduction {
-    font-size: 0.8rem;
-    font-family: $font-principal;
-    font-weight: normal;
-    font-style: italic;
+.face-verso .mot-label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+    color: $c-texte-secondaire;
 }
 
-.bloc-langue {
-    display: flex;
+.face-verso .mot-ligne {
+    flex-direction: column;
     align-items: center;
-    gap: 15px;
+    text-align: center;
+    gap: 4px;
 }
 
-// BOUTON 
+.face-verso .mot-entete {
+    justify-content: center;
+}
 
+.face-verso .mot-formes {
+    justify-content: center;
+}
+
+// --- Boutons ✕/✓ ---
 .boutons-reponse {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 22px;
     margin-top: 20px;
 }
 
 .boutons-reponse button {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    border-radius: 12px;
-    border: 2px solid $c-bordure-classique;
-    background: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    font-size: 1.6rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease;
 }
 
 .boutons-reponse button:first-child {
-    color: #D9534F;
-    border-color: #D9534F;
+    background-color: #FCEBEB;
+    border: 2px solid #E24B4A;
+    color: #A32D2D;
 }
 
 .boutons-reponse button:last-child {
-    color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #EAF3DE;
+    border: 2px solid #639922;
+    color: #3B6D11;
+}
+
+.boutons-reponse button:hover {
+    transform: scale(1.08);
 }

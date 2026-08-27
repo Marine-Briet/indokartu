@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 
 function Header({ simple = false}) {
   const [menuOuvert, setMenuOuvert] = useState(false);
-  const {deconnexion} = useAuth();
+  const {deconnexion, user} = useAuth();
   const navigate = useNavigate();;
 
   function gererDeconnexion() {
@@ -18,7 +18,7 @@ function Header({ simple = false}) {
 
   return (
     <header className="header">
-        <p>IndoKartu</p>
+        <p className="logo-header" onClick={() => navigate(user ? "/tableau-de-bord" : "/")}>IndoKartu</p>
 
         {!simple && (
           <>
@@ -29,7 +29,9 @@ function Header({ simple = false}) {
               <NavLink to="/vocabulaire">Vocabulaire</NavLink>
               <NavLink to="/mes-resultats">Mes résultats</NavLink>
               <NavLink to="/mes-infos">Mes infos</NavLink>
-              <NavLink to="/admin">Gérer les données</NavLink>
+              {user?.est_admin && (
+                  <NavLink to="/admin">Gérer les données</NavLink>
+              )}
             </nav>
 
             <div className="header__droite">

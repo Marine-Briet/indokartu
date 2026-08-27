@@ -1,4 +1,3 @@
-import Card from "../components/Card";
 import Header from "../components/Header";
 import Champ from "../components/Champ";
 import Bouton from "../components/Bouton";
@@ -46,9 +45,9 @@ function Connexion() {
             <Header simple/>
             <div className="page-centree">
                 <form onSubmit={gererConnexion}>
-                    <Card className="carte-formulaire">
+                    <div className="carte-formulaire">
                         <div className="formulaire">
-                            <h1 className="titre-formulaire-connexion">Connexion</h1>
+                            <p className="titre-formulaire-connexion">Connexion</p>
                             <Champ label="Votre adresse mail" type="email" valeur={email} onChange={(e) => setEmail(e.target.value)} placeholder="votre adresse mail..." />
                             <Champ label="Votre mot de passe" type="password" valeur={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} placeholder="votre mot de passe..." />
                             <button type="button" className="lien-aide" onClick={() => setAideOuvert(!aideOuvert)}>
@@ -70,7 +69,7 @@ function Connexion() {
                             <Bouton type="submit">JE ME CONNECTE</Bouton>
                             <p className="lien-secondaire">Pas de compte ? <NavLink to="/inscription">Inscrivez-vous</NavLink></p>
                         </div>
-                    </Card>
+                    </div>
                 </form>
             </div>
         </div>

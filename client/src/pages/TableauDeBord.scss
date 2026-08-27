@@ -1,0 +1,58 @@
+@use '../styles/variables' as *;
+
+.salutation {
+    text-align: center;
+    margin: 30px 0 5px 0;
+}
+
+.sous-titre-tdb {
+    text-align: center;
+    color: $c-texte-secondaire;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+.carte-navigation {
+    cursor: pointer;
+    margin-bottom: 15px;
+    padding: 20px 22px;
+    transition: border-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.carte-navigation:hover {
+    border-color: $c-accent;
+}
+
+.titre-carte-nav {
+    font-family: $font-secondaire;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: $c-texte-principal;
+    margin-bottom: 4px;
+}
+
+.sous-titre-carte-nav {
+    font-family: $font-principal;
+    font-size: 0.85rem;
+    color: $c-texte-secondaire;
+    font-style: normal;
+}
+
+.icone-carte-nav {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.icone-cartes, .icone-vocabulaire, .icone-resultats, .icone-admin {
+    background-color: #FAF0DC;
+}

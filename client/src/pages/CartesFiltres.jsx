@@ -145,7 +145,7 @@ function CartesFiltres() {
                         </span>
                     </div>
                 </div>
-                <div className="filtres-categories">
+                <div className="filtres-categories-lignes">
                     {categories.map((cat) => (
                         <Bouton
                         key={cat.id_categ}
