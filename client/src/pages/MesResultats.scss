@@ -1,5 +1,6 @@
 @use '../styles/variables' as *;
 
+// --- 2 cartes côte à côte : nombre de sessions / moyenne ---
 .cartes-stats-duo {
     display: flex;
     gap: 15px;
@@ -29,6 +30,7 @@
     color: $c-accent;
 }
 
+// --- Carte % de vocabulaire maîtrisé ---
 .carte-maitrise {
     margin-bottom: 20px;
     position: relative;
@@ -45,12 +47,12 @@
 
 .sous-titre-maitrise {
     font-size: 0.7rem;
-    font-family: $font-principal;
     color: $c-texte-secondaire;
     text-align: right;
     margin-left: 8px;
 }
 
+// --- TOP 10 des mots redoutés ---
 .titre-top10 {
     font-family: $font-secondaire;
     font-style: italic;
@@ -73,9 +75,9 @@
     font-style: italic;
     color: $c-texte-principal;
     font-size: 1rem;
-    
 }
 
+// --- Bouton "?" rond, pour les bulles d'aide ---
 .bouton-aide-rond {
     position: absolute;
     top: 10px;
@@ -83,7 +85,6 @@
     background: none;
     border: 1px solid $c-bordure-classique;
     border-radius: 50%;
-    text-decoration: none;
     width: 20px;
     height: 20px;
     font-size: 0.8rem;
@@ -96,8 +97,7 @@
     color: $c-accent;
 }
 
-// SI AUCUNE SESSION
-
+// --- Cas "aucune session réalisée" ---
 .carte-aucune-session {
     text-align: center;
     padding: 40px 25px;

@@ -1,8 +1,6 @@
 @use '../styles/variables' as *;
 
-
-// EN TETE
-
+// --- En-tête : retour aux filtres + progression ---
 .entete-session {
     display: flex;
     justify-content: space-between;
@@ -21,8 +19,7 @@
     font-size: 0.9rem;
 }
 
-// GLOBAL CARD
-
+// --- Structure du flip 3D ---
 .flip-container {
     perspective: 1200px;
 }
@@ -68,16 +65,15 @@
 }
 
 .kawung-pattern {
-  position: absolute;
-  inset: 0;
-  opacity: 0.06;
-  pointer-events: none;
-  background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 8px, #B8801F 8px, #B8801F 9px, transparent 9px);
-  background-size: 42px 42px;
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 8px, #B8801F 8px, #B8801F 9px, transparent 9px);
+    background-size: 42px 42px;
 }
 
-// CARTE RECTO
-
+// --- Recto : mot à deviner ---
 .carte-recto {
     flex: 1;
     display: flex;
@@ -99,13 +95,6 @@
     gap: 15px;
 }
 
-.bloc-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-}
-
 .drapeau-langue {
     font-family: $font-secondaire;
     font-style: italic;
@@ -115,7 +104,6 @@
 
 .mot-affiche {
     font-family: $font-secondaire;
-    font-style: normal;
     font-size: 1.8rem;
     color: $c-texte-principal;
 }
@@ -129,8 +117,7 @@
     text-align: center;
 }
 
-// CARD VERSO :
-
+// --- Verso : détail du mot (racine, forme, traduction), centré ---
 .verso-contenu {
     flex: 1;
     display: flex;
@@ -139,7 +126,8 @@
     gap: 12px;
 }
 
-.drapeaux-ligne-indo, .drapeaux-ligne-fr {
+.drapeaux-ligne-indo,
+.drapeaux-ligne-fr {
     display: flex;
     gap: 15px;
     margin-bottom: 5px;
@@ -155,6 +143,7 @@
     flex-shrink: 0;
 }
 
+// Surcharges spécifiques au verso (le reste vient de main.scss : .mot-ligne, .mot-label, .mot-formes...)
 .face-verso .mot-racine {
     color: $c-accent;
     font-size: 1.3rem;
@@ -183,21 +172,7 @@
     justify-content: center;
 }
 
-.mot-traduction {
-    font-size: 0.8rem;
-    font-family: $font-principal;
-    font-weight: normal;
-    font-style: italic;
-}
-
-.bloc-langue {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-// BOUTON 
-
+// --- Boutons ✕/✓ ---
 .boutons-reponse {
     display: flex;
     justify-content: center;

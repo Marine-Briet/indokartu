@@ -2,11 +2,10 @@
 
 .header {
     background-color: $c-fond;
-    padding: 20px 10px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;  
 }
 
 .header__droite {
@@ -29,10 +28,10 @@
     border: none;
     font-size: 2rem;
     background: none;
-    border: none;
     cursor: pointer;
 }
 
+// --- Menu mobile : caché par défaut, glisse depuis la droite ---
 .menu {
     position: fixed;
     top: 0;
@@ -42,18 +41,17 @@
     background-color: $c-fond;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    padding: 30px 20px; 
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    z-index: 999;
+    z-index: 999; // passe au-dessus du contenu de la page (ex: cartes avec position:relative)
 }
 
 .menu a {
     color: $c-texte-principal;
     font-weight: 600;
     text-decoration: none;
-    
 }
 
 .menu a:hover {
@@ -89,6 +87,7 @@
     background-color: white;
 }
 
+// --- Desktop : menu horizontal, toujours visible ---
 @media (min-width: 768px) {
     .header {
         display: grid;
@@ -107,7 +106,7 @@
         height: auto;
         flex-direction: row;
     }
-    
+
     .btn-fermer {
         display: none;
     }
