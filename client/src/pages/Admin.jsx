@@ -43,19 +43,19 @@ function Admin() {
 
     // CHARGEMENT INITIAL : les 3 sources de données
     async function chargerMots() {
-        const reponse = await fetch("http://192.168.1.65:3000/api/mots");
+        const reponse = await fetch("http://localhost:3000/api/mots");
         const donnees = await reponse.json();
         setMots(donnees);
     }
 
     async function chargerCategories() {
-        const reponse = await fetch("http://192.168.1.65:3000/api/categories");
+        const reponse = await fetch("http://localhost:3000/api/categories");
         const donnees = await reponse.json();
         setCategories(donnees);
     }
 
     async function chargerTypes() {
-        const reponse = await fetch("http://192.168.1.65:3000/api/types-grammaticaux");
+        const reponse = await fetch("http://localhost:3000/api/types-grammaticaux");
         const donnees = await reponse.json();
         setTypes(donnees);
     }
@@ -77,8 +77,8 @@ function Admin() {
 
     // Liste des catégories filtrée par la recherche, triée par ordre alphabétique
     const categoriesFiltrees = categories
-        .filter((categorie) => categorie.nom_categ.toLowerCase().includes(rechercheCateg.toLowerCase()))
-        .sort((a, b) => a.nom_categ.localeCompare(b.nom_categ));
+    .filter((categorie) => categorie.nom_categ.toLowerCase().includes(rechercheCateg.toLowerCase()))
+    .sort((a, b) => a.nom_categ.localeCompare(b.nom_categ));
 
 
     // MOTS : ouverture de la modale
@@ -113,12 +113,12 @@ function Admin() {
             id_type: formIdType
         };
 
-        let url = "http://192.168.1.65:3000/api/mots";
+        let url = "http://localhost:3000/api/mots";
         let methode = "POST";
         const etaitEnEdition = !!motEnEdition;
 
         if (motEnEdition) {
-            url = `http://192.168.1.65:3000/api/mots/${motEnEdition.id_mot}`;
+            url = `http://localhost:3000/api/mots/${motEnEdition.id_mot}`;
             methode = "PUT";
         }
 
@@ -145,7 +145,7 @@ function Admin() {
         if (confirme) {
             const token = localStorage.getItem("token");
 
-            const reponse = await fetch(`http://192.168.1.65:3000/api/mots/${id_mot}`, {
+            const reponse = await fetch(`http://localhost:3000/api/mots/${id_mot}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -183,12 +183,12 @@ function Admin() {
             nom_categ: formNomCateg
         };
 
-        let url = "http://192.168.1.65:3000/api/categories";
+        let url = "http://localhost:3000/api/categories";
         let methode = "POST";
         const etaitEnEdition = !!categorieEnEdition;
 
         if (categorieEnEdition) {
-            url = `http://192.168.1.65:3000/api/categories/${categorieEnEdition.id_categ}`;
+            url = `http://localhost:3000/api/categories/${categorieEnEdition.id_categ}`;
             methode = "PUT";
         }
 
@@ -215,7 +215,7 @@ function Admin() {
         if (confirme) {
             const token = localStorage.getItem("token");
 
-            const reponse = await fetch(`http://192.168.1.65:3000/api/categories/${id_categ}`, {
+            const reponse = await fetch(`http://localhost:3000/api/categories/${id_categ}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -255,12 +255,12 @@ function Admin() {
             nom_type: formNomType
         };
 
-        let url = "http://192.168.1.65:3000/api/types-grammaticaux";
+        let url = "http://localhost:3000/api/types-grammaticaux";
         let methode = "POST";
         const etaitEnEdition = !!typeEnEdition;
 
         if (typeEnEdition) {
-            url = `http://192.168.1.65:3000/api/types-grammaticaux/${typeEnEdition.id_type}`;
+            url = `http://localhost:3000/api/types-grammaticaux/${typeEnEdition.id_type}`;
             methode = "PUT";
         }
 
@@ -287,7 +287,7 @@ function Admin() {
         if (confirme) {
             const token = localStorage.getItem("token");
 
-            const reponse = await fetch(`http://192.168.1.65:3000/api/types-grammaticaux/${id_type}`, {
+            const reponse = await fetch(`http://localhost:3000/api/types-grammaticaux/${id_type}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`

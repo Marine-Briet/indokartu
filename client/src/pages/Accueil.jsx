@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
 import Bouton from "../components/Bouton";
 import { useNavigate } from "react-router-dom";
 import "./Accueil.scss";
@@ -9,15 +8,16 @@ function Accueil() {
     const [nombreMots, setNombreMots] = useState(0);
     const [nombreCategories, setNombreCategories] = useState(0);
 
+    //  CHARGEMENT : chiffres réels affichés sur la page (mots/thèmes disponibles) 
     useEffect(() => {
         async function chargerMots() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/mots");
+            const reponse = await fetch("http://localhost:3000/api/mots");
             const donnees = await reponse.json();
             setNombreMots(donnees.length);
         }
 
         async function chargerCategories() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/categories");
+            const reponse = await fetch("http://localhost:3000/api/categories");
             const donnees = await reponse.json();
             setNombreCategories(donnees.length);
         }
@@ -29,6 +29,7 @@ function Accueil() {
     return (
         <div>
             <div className="page-accueil">
+                {/*  Illustration : carte "makan" en vedette, entourée de 2 cartes mystère  */}
                 <div className="pile-cartes">
                     <div className="carte-mystere carte-mystere--gauche">?</div>
                     <div className="carte-mystere carte-mystere--droite">?</div>

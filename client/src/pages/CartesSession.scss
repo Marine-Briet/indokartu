@@ -1,6 +1,6 @@
 @use '../styles/variables' as *;
 
-// --- En-tête : retour aux filtres + progression ---
+//  En-tête : retour aux filtres + progression 
 .entete-session {
     display: flex;
     justify-content: space-between;
@@ -19,7 +19,7 @@
     font-size: 0.9rem;
 }
 
-// --- Structure du flip 3D ---
+//  Structure du flip 3D 
 .flip-container {
     perspective: 1200px;
 }
@@ -77,7 +77,7 @@
     background-size: 42px 42px;
 }
 
-// --- Recto : mot à deviner ---
+//  Recto : mot à deviner 
 .carte-recto {
     flex: 1;
     display: flex;
@@ -121,7 +121,7 @@
     text-align: center;
 }
 
-// --- Verso : détail du mot (racine, forme, traduction), centré ---
+//  Verso : détail du mot (racine, forme, traduction), centré 
 .verso-contenu {
     flex: 1;
     display: flex;
@@ -176,7 +176,7 @@
     justify-content: center;
 }
 
-// --- Boutons ✕/✓ ---
+//  Boutons ✕/✓ 
 .boutons-reponse {
     display: flex;
     justify-content: center;

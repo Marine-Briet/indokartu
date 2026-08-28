@@ -7,11 +7,11 @@ import { hexToRgba } from "../utils/colors";
 import "./CartesSession.scss";
 
 function CartesSession() {
-    // --- Données venant du Context (transmises depuis CartesFiltres) ---
+    //  Données venant du Context (transmises depuis CartesFiltres) 
     const { orientation, motsSession, resultatsSession, setResultatsSession } = useSession();
     const navigate = useNavigate();
 
-    // --- États LOCAUX à cette page ---
+    //  États LOCAUX à cette page 
     const [indexActuel, setIndexActuel] = useState(0);
     const [carteRetournee, setCarteRetournee] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -22,22 +22,22 @@ function CartesSession() {
     // un changement de style avant de réactiver la transition (voir plus bas)
     const carteRef = useRef(null);
 
-    // --- PROTECTION : redirection si arrivée sans mots tirés ---
+    //  PROTECTION : redirection si arrivée sans mots tirés 
     useEffect(() => {
         if (!motsSession || motsSession.length === 0) {
             navigate("/cartes-filtres");
         }
     }, []);
 
-    // --- CHARGEMENT INITIAL : catégories/types ---
+    //  CHARGEMENT INITIAL : catégories/types 
     useEffect(() => {
         async function chargerCategories() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/categories");
+            const reponse = await fetch("http://localhost:3000/api/categories");
             const donnees = await reponse.json();
             setCategories(donnees);
         }
         async function chargerTypes() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/types-grammaticaux");
+            const reponse = await fetch("http://localhost:3000/api/types-grammaticaux");
             const donnees = await reponse.json();
             setTypes(donnees);
         }
@@ -45,25 +45,22 @@ function CartesSession() {
         chargerTypes();
     }, []);
 
-    // --- Réactive la transition après un flip "sans transition" (changement de carte) ---
-    // IMPORTANT : ce useEffect doit rester ICI, avec tous les autres Hooks,
-    // TOUJOURS AVANT les "if (...) return" plus bas (règle des Hooks React :
-    // le nombre et l'ordre des Hooks doit être identique à chaque rendu)
+    //  Réactive la transition après un flip "sans transition" (changement de carte) 
     useEffect(() => {
         if (!transitionActive && carteRef.current) {
             // Force le navigateur à appliquer le style actuel avant de continuer
-            // (lire offsetHeight déclenche ce recalcul, appelé "reflow")
+
             void carteRef.current.offsetHeight;
 
             // On attend le prochain rafraîchissement d'écran avant de réactiver
-            // la transition, une fois sûrs que le saut instantané a été affiché
+            // la transition, une fois sûr que le saut instantané a été affiché
             requestAnimationFrame(() => {
                 setTransitionActive(true);
             });
         }
     }, [transitionActive]);
 
-    // --- PROTECTIONS D'AFFICHAGE : à partir d'ici, plus aucun Hook ne doit être ajouté ---
+    //  PROTECTIONS D'AFFICHAGE : à partir d'ici, plus aucun Hook ne doit être ajouté 
     if (!motsSession || motsSession.length === 0) {
         return null;
     }
@@ -72,7 +69,7 @@ function CartesSession() {
         return null;
     }
 
-    // --- Mot actuellement affiché + infos calculées pour cette carte précise ---
+    //  Mot actuellement affiché + infos calculées pour cette carte précise 
     const motActuel = motsSession[indexActuel];
     const texteRecto = orientation === "fr-vers-id" ? motActuel.traduction : motActuel.racine;
     const categorieActuelle = categories.find((cat) => cat.id_categ === motActuel.id_categ);
@@ -85,7 +82,7 @@ function CartesSession() {
           }
         : {};
 
-    // --- Appelée au clic sur ✕ ou ✓ : enregistre la réponse, avance, ou termine la session ---
+    //  Appelée au clic sur ✕ ou ✓ : enregistre la réponse, avance, ou termine la session 
     async function repondre(reussi) {
         const resultatCompletSession = [...resultatsSession, { id_mot: motActuel.id_mot, racine: motActuel.racine, reussi: reussi }];
         setResultatsSession(resultatCompletSession);
@@ -98,7 +95,7 @@ function CartesSession() {
                 est_reussi: resultat.reussi
             }));
             const token = localStorage.getItem("token");
-            await fetch("http://192.168.1.65:3000/api/sessions", {
+            await fetch("http://localhost:3000/api/sessions", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -109,7 +106,7 @@ function CartesSession() {
             navigate("/resultats-session");
         } else {
             // On coupe la transition ET on passe à la carte suivante en même temps,
-            // pour ne jamais voir le contenu du verso pendant le retour au recto
+            // sinon problème : on voit le contenu du verso pendant le retour au recto
             setTransitionActive(false);
             setIndexActuel(indexActuel + 1);
             setCarteRetournee(false);
@@ -120,7 +117,7 @@ function CartesSession() {
         <div>
             <Header />
             <div className="page-flashcard">
-                {/* --- En-tête : retour aux filtres + progression --- */}
+                {/*  En-tête : retour aux filtres + progression  */}
                 <div className="entete-session">
                     <span className="lien-retour" onClick={() => navigate("/cartes-filtres")}>← Revenir aux filtres</span>
                     <span className="compteur-carte">Carte {indexActuel + 1}/{motsSession.length}</span>
@@ -134,7 +131,7 @@ function CartesSession() {
                         onClick={() => setCarteRetournee(!carteRetournee)}
                     >
 
-                        {/* --- RECTO --- */}
+                        {/*  RECTO  */}
                         <div className="face-recto" style={styleCouleur}>
                             <div className="kawung-pattern"></div>
                             <div className="carte-badges">
@@ -148,7 +145,7 @@ function CartesSession() {
                             <p className="instruction-carte">Appuyer pour voir la réponse</p>
                         </div>
 
-                        {/* --- VERSO --- */}
+                        {/*  VERSO  */}
                         <div className="face-verso" style={styleCouleur}>
                             <div className="kawung-pattern"></div>
                             <div className="carte-badges">
