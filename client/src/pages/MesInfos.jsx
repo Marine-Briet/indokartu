@@ -22,7 +22,7 @@ function MesInfos() {
     useEffect(() => {
         async function chargerInfos() {
             const token = localStorage.getItem("token");
-            const reponse = await fetch("http://localhost:3000/api/mes-infos", {
+            const reponse = await fetch("http://192.168.1.65:3000/api/mes-infos", {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 },
@@ -61,7 +61,7 @@ function MesInfos() {
 
         const token = localStorage.getItem("token");
 
-        const reponse = await fetch("http://localhost:3000/api/mes-infos", {
+        const reponse = await fetch("http://192.168.1.65:3000/api/mes-infos", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

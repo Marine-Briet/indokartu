@@ -9,6 +9,7 @@
     padding: 0;
     box-sizing: border-box; // width/height incluent padding + border, partout dans l'appli
     font-family: $font-principal;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -19,7 +20,7 @@ body {
 
 h1 {
     font-family: $font-principal;
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
     margin: 20px 0;
 }
@@ -51,6 +52,23 @@ h1 {
     padding: 20px;
 }
 
+// Section filtre utilisée pour les pages Vocabulaire et CarteFiltre
+.entete-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 10px;
+}
+
+.instruction-filtre {
+    flex: 1;
+}
+
+.tout-selectionner {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
 
 // FORMULAIRES : Connexion / Inscription
 
@@ -135,7 +153,7 @@ h1 {
     border: 1px solid $c-bordure-classique;
     border-radius: 6px;
     padding: 2px 8px;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     font-weight: 600;
     color: $c-texte-secondaire;
 }
@@ -143,7 +161,7 @@ h1 {
 .mot-ligne {
     display: flex;
     align-items: center;
-    gap: 15px;
+    // gap: 15px;
 }
 
 .mot-label {
@@ -155,30 +173,30 @@ h1 {
 }
 
 .mot-racine {
-    font-family: $font-principal;
+    font-family: $font-secondaire;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: $c-texte-principal;
 }
 
 .mot-formes {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
 }
 
 .tag-forme {
     background-color: $c-fond;
     border-radius: 8px;
     padding: 4px 10px;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: $c-texte-secondaire;
 }
 
 .mot-traduction {
     font-family: $font-principal;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-style: italic;
     color: $c-texte-secondaire;
 }

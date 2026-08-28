@@ -20,7 +20,7 @@ function Connexion() {
     async function gererConnexion(e) {
         e.preventDefault();
 
-        const reponse = await fetch("http://localhost:3000/api/auth/connexion", {
+        const reponse = await fetch("http://192.168.1.65:3000/api/auth/connexion", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"

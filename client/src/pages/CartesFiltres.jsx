@@ -24,19 +24,19 @@ function CartesFiltres() {
 
     useEffect(() => {
         async function chargerCategories() {
-            const reponse = await fetch("http://localhost:3000/api/categories");
+            const reponse = await fetch("http://192.168.1.65:3000/api/categories");
             const donnees = await reponse.json();
             setCategories(donnees);
         }
 
         async function chargerTypes() {
-            const reponse = await fetch("http://localhost:3000/api/types-grammaticaux");
+            const reponse = await fetch("http://192.168.1.65:3000/api/types-grammaticaux");
             const donnees = await reponse.json();
             setTypes(donnees);
         }
 
         async function chargerMots() {
-            const reponse = await fetch("http://localhost:3000/api/mots");
+            const reponse = await fetch("http://192.168.1.65:3000/api/mots");
             const donnees = await reponse.json();
             setMots(donnees);
         }
@@ -122,7 +122,7 @@ function CartesFiltres() {
                 {/* --- FILTRES TYPES GRAMMATICAUX --- */}
                 <div className="section-filtre">
                     <div className="entete-section">
-                        <p className="instruction-filtre">Choisir un type grammatical (ou plusieurs) :</p>
+                        <p className="instruction-filtre">Type grammatical (ou plusieurs) :</p>
                         <span className="tout-selectionner" onClick={typesSelectionnes.length === types.length ? toutDeselectionnerTypes : toutSelectionnerTypes}>
                             {typesSelectionnes.length === types.length ? "Tout désélectionner" : "Tout sélectionner"}
                         </span>
@@ -139,7 +139,7 @@ function CartesFiltres() {
                 {/* --- FILTRES CATÉGORIES --- */}
                 <div className="section-filtre">
                     <div className="entete-section">
-                        <p className="instruction-filtre">Choisir une catégorie (ou plusieurs) :</p>
+                        <p className="instruction-filtre">Catégorie (ou plusieurs) :</p>
                         <span className="tout-selectionner" onClick={categoriesSelectionnees.length === categories.length ? toutDeselectionnerCategories : toutSelectionnerCategories}>
                             {categoriesSelectionnees.length === categories.length ? "Tout désélectionner" : "Tout sélectionner"}
                         </span>

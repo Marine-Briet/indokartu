@@ -15,7 +15,7 @@ function MesResultats() {
     useEffect(() => {
         async function chargerStats() {
             const token = localStorage.getItem("token");
-            const reponse = await fetch("http://localhost:3000/api/mes-resultats", {
+            const reponse = await fetch("http://192.168.1.65:3000/api/mes-resultats", {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 },
