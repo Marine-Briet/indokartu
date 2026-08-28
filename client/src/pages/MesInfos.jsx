@@ -6,23 +6,23 @@ import "./MesInfos.scss"
 import Bouton from "../components/Bouton";
 
 function MesInfos() {
-    // --- États des champs du formulaire ---
+    //  États des champs du formulaire 
     const [email, setEmail] = useState("");
     const [emailOrigine, setEmailOrigine] = useState(""); // valeur de départ, pour détecter un vrai changement
     const [motDePasse, setMotDePasse] = useState("********"); // texte factice, jamais la vraie valeur venant de l'API
 
-    // --- États d'interface ---
+    //  États d'interface 
     const [modificationActive, setModificationActive] = useState(false); // champs grisés ou modifiables
     const [message, setMessage] = useState({ texte: "", type: "" });
 
-    // --- Règle de validation du mot de passe (identique à Inscription) ---
+    //  Règle de validation du mot de passe (identique à Inscription) 
     const regexMotDePasse = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
-    // --- CHARGEMENT INITIAL : récupère l'email actuel via l'API (route protégée par JWT) ---
+    //  CHARGEMENT INITIAL : récupère l'email actuel via l'API (route protégée par JWT) 
     useEffect(() => {
         async function chargerInfos() {
             const token = localStorage.getItem("token");
-            const reponse = await fetch("http://192.168.1.65:3000/api/mes-infos", {
+            const reponse = await fetch("http://localhost:3000/api/mes-infos", {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 },
@@ -34,26 +34,26 @@ function MesInfos() {
         chargerInfos();
     }, []);
 
-    // --- Appelée au clic sur "Confirmer" ---
+    //  Appelée au clic sur "Confirmer" 
     async function enregistrerModifications() {
         // On détermine ce qui a réellement changé par rapport aux valeurs de départ
         const motDePasseModifie = motDePasse !== "********";
         const emailModifie = email !== emailOrigine;
 
-        // 1. Rien n'a changé : on bloque avant tout, pas d'appel API
+        // 1. Rien n'a changé : pas d'appel API
         if (!motDePasseModifie && !emailModifie) {
             setMessage({ texte: "Aucune modification n'a été apportée", type: "erreur" });
             return;
         }
 
-        // 2. Le mot de passe a changé mais ne respecte pas les règles : on bloque aussi
+        // 2. Le mot de passe a changé mais ne respecte pas les règles
         if (motDePasseModifie && !regexMotDePasse.test(motDePasse)) {
             setMessage({ texte: "Le mot de passe ne respecte pas les règles demandées", type: "erreur" });
             return;
         }
 
         // 3. Tout est valide : on construit le corps de la requête
-        // (on n'envoie mot_de_passe QUE s'il a vraiment été modifié, sinon le back ne doit pas le voir)
+        // (on n'envoie mot_de_passe QUE s'il a vraiment été modifié)
         const corps = { email };
         if (motDePasseModifie) {
             corps.mot_de_passe = motDePasse;
@@ -61,7 +61,7 @@ function MesInfos() {
 
         const token = localStorage.getItem("token");
 
-        const reponse = await fetch("http://192.168.1.65:3000/api/mes-infos", {
+        const reponse = await fetch("http://localhost:3000/api/mes-infos", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

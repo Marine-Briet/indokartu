@@ -7,32 +7,32 @@ import Bouton from "../components/Bouton"
 
 
 function Vocabulaire() {
-    // --- ÉTATS : données venant de l'API ---
+    //  ÉTATS : données venant de l'API 
     const [mots, setMots] = useState([]);
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
 
-    // --- ÉTATS : recherche et filtres sélectionnés par l'utilisateur ---
+    //  ÉTATS : recherche et filtres sélectionnés par l'utilisateur 
     const [recherche, setRecherche] = useState("");
     const [typesSelectionnes, setTypesSelectionnes] = useState([]); // tableau d'id_type
     const [categoriesSelectionnees, setCategoriesSelectionnees] = useState([]); // tableau d'id_categ
 
-    // --- CHARGEMENT INITIAL : les 3 appels API, une seule fois au montage du composant ---
+    //  CHARGEMENT INITIAL : les 3 appels API, une seule fois au montage du composant 
     useEffect(() => {
         async function chargerMots() {
-            const reponse = await fetch ("http://192.168.1.65:3000/api/mots");
+            const reponse = await fetch ("http://localhost:3000/api/mots");
             const donnees =  await reponse.json();
             setMots(donnees);
         }
     
         async function chargerCategories() {
-            const reponse = await fetch ("http://192.168.1.65:3000/api/categories");
+            const reponse = await fetch ("http://localhost:3000/api/categories");
             const donnees = await reponse.json();
             setCategories(donnees);
         }
     
         async function chargerTypes() {
-            const reponse = await fetch ("http://192.168.1.65:3000/api/types-grammaticaux");
+            const reponse = await fetch ("http://localhost:3000/api/types-grammaticaux");
             const donnees = await reponse.json();
             setTypes(donnees);
         }
@@ -42,7 +42,7 @@ function Vocabulaire() {
 
     },[]);
 
-    // --- FILTRAGE : calcule la liste finale de mots à afficher, à chaque re-render ---
+    //  FILTRAGE : calcule la liste finale de mots à afficher, à chaque re-render 
     // Règles combinées : recherche texte (racine OU traduction) + filtre type + filtre catégorie
     // + rien ne s'affiche tant qu'aucune recherche ni aucun filtre n'est actif
     const motsFiltres = mots.filter((mot) => {
@@ -70,7 +70,7 @@ function Vocabulaire() {
     .sort((a, b) => a.racine.localeCompare(b.racine));
 
 
-    // --- TOGGLE FILTRES : ajoute/retire un id du tableau de sélection au clic ---
+    //  TOGGLE FILTRES : ajoute/retire un id du tableau de sélection au clic 
     function toggleType(id) {
         if (typesSelectionnes.includes(id)) {
             setTypesSelectionnes(typesSelectionnes.filter((t) => t !== id));
@@ -87,7 +87,7 @@ function Vocabulaire() {
         }
     }
 
-    // --- TOUT SÉLECTIONNER / DÉSÉLECTIONNER : remplit ou vide le tableau de sélection ---
+    //  TOUT SÉLECTIONNER / DÉSÉLECTIONNER : remplit ou vide le tableau de sélection 
     function toutSelectionnerTypes() {
         setTypesSelectionnes(types.map((t) => t.id_type));
     }
@@ -110,7 +110,7 @@ function Vocabulaire() {
             <div className="page-contenu">
                 <h1>Vocabulaire</h1>
 
-                {/* --- BARRE DE RECHERCHE --- */}
+                {/*  BARRE DE RECHERCHE  */}
                 <div>
                     <input className="barre-recherche" 
                     type="text" 
@@ -120,7 +120,7 @@ function Vocabulaire() {
                     placeholder="Recherche un mot en français ou indonésien..." />
                 </div>
 
-                {/* --- FILTRES TYPES GRAMMATICAUX --- */}
+                {/*  FILTRES TYPES GRAMMATICAUX  */}
                 <div className="section-filtre">
                     <div className="entete-section">
                         <p className="instruction-filtre">Type grammatical (ou plusieurs) :</p>
@@ -137,7 +137,7 @@ function Vocabulaire() {
                     ))}
                 </div>
                 
-                {/* --- FILTRES CATÉGORIES --- */}
+                {/*  FILTRES CATÉGORIES  */}
                 <div className="section-filtre">
                     <div className="entete-section">
                         <p className="instruction-filtre">Catégorie (ou plusieurs) :</p>
@@ -160,7 +160,7 @@ function Vocabulaire() {
                     ))}
                 </div>
                 
-                {/* --- COMPTEUR + LISTE DES MOTS FILTRÉS --- */}
+                {/*  COMPTEUR + LISTE DES MOTS FILTRÉS  */}
                 <p className="compteur-mots">{motsFiltres.length} mot{motsFiltres.length > 1 ? "s" : ""} affiché{motsFiltres.length > 1 ? "s" : ""}</p>
                 <div>
                     {motsFiltres.map((mot) => {

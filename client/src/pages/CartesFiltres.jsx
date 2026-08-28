@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "../context/SessionContext";
 import Header from "../components/Header"
 import Bouton from "../components/Bouton"
@@ -6,37 +6,42 @@ import "./CartesFiltres.scss";
 import { useNavigate } from 'react-router-dom';
 
 
-
 function CartesFiltres() {
-    
+
+    // ÉTATS : données venant de l'API (chargées localement, pas dans le Context) 
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
-    const { categoriesSelectionnees, setCategoriesSelectionnees, 
-        typesSelectionnes, setTypesSelectionnes, 
-        orientation, setOrientation, 
-        nombreCartes, setNombreCartes,
-        setMotsSession,
-        setResultatsSession 
-        } = useSession();
-    const navigate = useNavigate();
-    const [erreur, setErreur] = useState("");
     const [mots, setMots] = useState([]);
 
+    // Données/actions du Context (partagées avec CartesSession et ResultatsSession) 
+    const { categoriesSelectionnees, setCategoriesSelectionnees,
+        typesSelectionnes, setTypesSelectionnes,
+        orientation, setOrientation,
+        nombreCartes, setNombreCartes,
+        setMotsSession,
+        setResultatsSession
+        } = useSession();
+    const navigate = useNavigate();
+
+    // État local : message de blocage si aucun filtre sélectionné 
+    const [erreur, setErreur] = useState("");
+
+    // CHARGEMENT INITIAL : les 3 sources de données, une seule fois au montage 
     useEffect(() => {
         async function chargerCategories() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/categories");
+            const reponse = await fetch("http://localhost:3000/api/categories");
             const donnees = await reponse.json();
             setCategories(donnees);
         }
 
         async function chargerTypes() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/types-grammaticaux");
+            const reponse = await fetch("http://localhost:3000/api/types-grammaticaux");
             const donnees = await reponse.json();
             setTypes(donnees);
         }
 
         async function chargerMots() {
-            const reponse = await fetch("http://192.168.1.65:3000/api/mots");
+            const reponse = await fetch("http://localhost:3000/api/mots");
             const donnees = await reponse.json();
             setMots(donnees);
         }
@@ -46,7 +51,8 @@ function CartesFiltres() {
         chargerMots();
     }, []);
 
-
+    // PRÉ-SÉLECTION : une fois catégories/types chargés, on les coche tous par défaut 
+    // (contrairement à Vocabulaire, où rien n'est sélectionné au départ)
     useEffect(() => {
         if (categories.length > 0) {
             setCategoriesSelectionnees(categories.map((cat) => cat.id_categ));
@@ -59,12 +65,12 @@ function CartesFiltres() {
         }
     }, [types]);
 
-    // --- TOGGLE FILTRES : ajoute/retire ---
+    // TOGGLE FILTRES : ajoute/retire un id du tableau de sélection au clic 
     function toggleType(id) {
         if (typesSelectionnes.includes(id)) {
             setTypesSelectionnes(typesSelectionnes.filter((t) => t !== id));
         } else {
-            setTypesSelectionnes([...typesSelectionnes, id]); 
+            setTypesSelectionnes([...typesSelectionnes, id]);
         }
     }
 
@@ -76,8 +82,9 @@ function CartesFiltres() {
         }
     }
 
+    // TOUT SÉLECTIONNER / DÉSÉLECTIONNER 
     function toutSelectionnerTypes() {
-    setTypesSelectionnes(types.map((t) => t.id_type));
+        setTypesSelectionnes(types.map((t) => t.id_type));
     }
 
     function toutDeselectionnerTypes() {
@@ -92,26 +99,30 @@ function CartesFiltres() {
         setCategoriesSelectionnees([]);
     }
 
+    // Mots correspondant aux filtres actuellement sélectionnés 
+    const motsCorrespondants = mots.filter((mot) =>
+        typesSelectionnes.includes(mot.id_type) && categoriesSelectionnees.includes(mot.id_categ)
+    );
+
+    // Nombre réel de cartes qui seront tirées (jamais plus que ce qui est réellement disponible) 
+    const nombreCartesReel = nombreCartes === "toutes" ? motsCorrespondants.length : Math.min(nombreCartes, motsCorrespondants.length);
+
+    // Appelée au clic sur "Commencer" : tirage aléatoire + redirection vers la session 
     function commencerSession() {
         if (typesSelectionnes.length === 0 || categoriesSelectionnees.length === 0) {
             setErreur("Sélectionne au moins un type et une catégorie pour commencer.");
             return;
         }
 
+        // Mélange le tableau, puis garde les N premiers mots (tirage aléatoire)
         const motsMelanges = [...motsCorrespondants].sort(() => Math.random() - 0.5);
         const nombreATirer = nombreCartes === "toutes" ? motsMelanges.length : nombreCartes;
         const motsTires = motsMelanges.slice(0, nombreATirer);
 
         setMotsSession(motsTires);
-        setResultatsSession([]); //repartir d'une liste de résultats vide pour cette nouvelle session
+        setResultatsSession([]); // repartir d'une liste de résultats vide pour cette nouvelle session
         navigate("/cartes-session");
     }
-
-    const motsCorrespondants = mots.filter((mot) => 
-        typesSelectionnes.includes(mot.id_type) && categoriesSelectionnees.includes(mot.id_categ)
-    );
-
-    const nombreCartesReel = nombreCartes === "toutes" ? motsCorrespondants.length : Math.min(nombreCartes, motsCorrespondants.length);
 
     return (
         <div>
@@ -119,7 +130,7 @@ function CartesFiltres() {
             <div className="page-contenu">
                 <h1>Cartes</h1>
 
-                {/* --- FILTRES TYPES GRAMMATICAUX --- */}
+                {/* FILTRES TYPES GRAMMATICAUX */}
                 <div className="section-filtre">
                     <div className="entete-section">
                         <p className="instruction-filtre">Type grammatical (ou plusieurs) :</p>
@@ -136,7 +147,7 @@ function CartesFiltres() {
                     ))}
                 </div>
 
-                {/* --- FILTRES CATÉGORIES --- */}
+                {/* FILTRES CATÉGORIES (rangées + checkbox, style différent de Vocabulaire) */}
                 <div className="section-filtre">
                     <div className="entete-section">
                         <p className="instruction-filtre">Catégorie (ou plusieurs) :</p>
@@ -148,17 +159,18 @@ function CartesFiltres() {
                 <div className="filtres-categories-lignes">
                     {categories.map((cat) => (
                         <Bouton
-                        key={cat.id_categ}
-                        variant="ligne-categorie"
-                        couleur={cat.couleur_categ}
-                        actif={categoriesSelectionnees.includes(cat.id_categ)}
-                        onClick={() => toggleCategorie(cat.id_categ)}
+                            key={cat.id_categ}
+                            variant="ligne-categorie"
+                            couleur={cat.couleur_categ}
+                            actif={categoriesSelectionnees.includes(cat.id_categ)}
+                            onClick={() => toggleCategorie(cat.id_categ)}
                         >
-                        {cat.nom_categ}
+                            {cat.nom_categ}
                         </Bouton>
                     ))}
                 </div>
 
+                {/* ORIENTATION : choix UNIQUE (pas de tableau, une seule valeur) */}
                 <div className="section-orientation">
                     <p className="instruction-filtre">Orientation :</p>
                     <div className="choix-orientation">
@@ -171,7 +183,7 @@ function CartesFiltres() {
                     </div>
                 </div>
 
-                
+                {/* NOMBRE DE CARTES : choix UNIQUE aussi */}
                 <div className="section-nombre">
                     <p className="instruction-filtre">Nombre de cartes :</p>
                     <div className="choix-nombre">
@@ -180,11 +192,11 @@ function CartesFiltres() {
                         <Bouton variant="filtre" actif={nombreCartes === "toutes"} onClick={() => setNombreCartes("toutes")}>TOUTES</Bouton>
                     </div>
                 </div>
-                
+
                 {erreur && <p className="message-formulaire message-formulaire--erreur">{erreur}</p>}
                 <Bouton variant="cta" onClick={commencerSession}>
                     COMMENCER ({nombreCartesReel} mot{nombreCartesReel > 1 ? "s" : ""})
-                </Bouton>  
+                </Bouton>
             </div>
         </div>
     )

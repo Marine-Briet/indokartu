@@ -11,22 +11,21 @@ import MesResultats from './pages/MesResultats';
 import ResultatsSession from './pages/ResultatsSession';
 import Vocabulaire from './pages/Vocabulaire';
 import NotFound from './pages/NotFound';
-// import AdminRoute from './routes/AdminRoute';
-// import PrivateRoute from './routes/PrivateRoute';
-// import PublicRoute from './routes/PublicRoute';
+import AdminRoute from './routes/AdminRoute';
+import PrivateRoute from './routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
 import { SessionProvider } from './context/SessionContext';
-import RouteOuverte from './routes/RouteOuverte';
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Accueil />} />
-      <Route element={<RouteOuverte />}>
+      <Route element={<PublicRoute />}>
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/inscription" element={<Inscription />} />
       </Route>
-      <Route element={<RouteOuverte />}>
+      <Route element={<PrivateRoute />}>
         <Route element={<SessionProvider />}>
           <Route path="/cartes-filtres" element={<CartesFiltres />} />
           <Route path="/cartes-session" element={<CartesSession />} />
@@ -37,7 +36,7 @@ function App() {
         <Route path="/vocabulaire" element={<Vocabulaire />} />
         <Route path="/mes-infos" element={<MesInfos />} />
       </Route>
-      <Route element={<RouteOuverte />}>
+      <Route element={<AdminRoute />}>
         <Route path="/admin" element={<Admin />} />
       </Route>
       <Route path="*" element={<NotFound />} />

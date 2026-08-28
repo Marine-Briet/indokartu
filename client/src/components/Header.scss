@@ -31,7 +31,7 @@
     cursor: pointer;
 }
 
-// --- Menu mobile : caché par défaut, glisse depuis la droite ---
+//  Menu mobile : caché par défaut, glisse depuis la droite 
 .menu {
     position: fixed;
     top: 0;
@@ -87,7 +87,7 @@
     background-color: white;
 }
 
-// --- Desktop : menu horizontal, toujours visible ---
+//  Desktop : menu horizontal, toujours visible 
 @media (min-width: 768px) {
     .header {
         display: grid;

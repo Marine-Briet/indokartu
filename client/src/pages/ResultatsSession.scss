@@ -17,7 +17,7 @@
     color: $c-texte-principal;
 }
 
-// --- Boutons Recommencer / Changer de mots / Détails ---
+//  Boutons Recommencer / Changer de mots / Détails 
 .boutons-resultat {
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@
     border: 1px solid $c-bordure-classique;
 }
 
-// --- Liste détaillée en 2 colonnes ---
+//  Liste détaillée en 2 colonnes 
 .details-liste {
     display: grid;
     grid-template-columns: 1fr 1fr;

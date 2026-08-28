@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-// --- Variant CTA (bouton plein, actions principales : connexion, valider...) ---
+//  Variant CTA (bouton plein, actions principales : connexion, valider...) 
 .bouton--cta {
     background-color: $c-accent;
     color: $c-text-white;
@@ -19,7 +19,7 @@
     background-color: darken($c-accent, 8%);
 }
 
-// --- Variant filtre (tags Types grammaticaux : Vocabulaire, CartesFiltres) ---
+//  Variant filtre (tags Types grammaticaux : Vocabulaire, CartesFiltres) 
 .bouton--filtre-actif {
     background-color: rgba($c-accent, 0.1);
     color: $c-accent;
@@ -40,7 +40,7 @@
     border-color: $c-accent;
 }
 
-// --- Variant filtre-categorie (tags Catégories à couleur dynamique : Vocabulaire) ---
+//  Variant filtre-categorie (tags Catégories à couleur dynamique : Vocabulaire) 
 .bouton--filtre-categorie {
     font-weight: bold;
     padding: 5px 10px;
@@ -48,7 +48,7 @@
     border-radius: 20px;
 }
 
-// --- Variant ligne-categorie (rangées + checkbox : CartesFiltres) ---
+//  Variant ligne-categorie (rangées + checkbox : CartesFiltres) 
 .bouton--ligne-categorie-actif,
 .bouton--ligne-categorie-inactif {
     display: flex;

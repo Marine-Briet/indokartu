@@ -7,7 +7,8 @@ import "./TableauDeBord.scss"
 function TableauDeBord() {
     const navigate = useNavigate();
     const { user } = useAuth();
-    
+
+    // Salutation indonésienne, différente selon l'heure de la journée
     function obtenirSalutation() {
         const heure = new Date().getHours();
 
@@ -27,8 +28,9 @@ function TableauDeBord() {
             <Header />
             <h1 className="salutation">{obtenirSalutation()}</h1>
             <div className="page-contenu">
-                <p className="sous-titre-tdb"> Prêt pour une nouvelle session ?</p>
-                
+                <p className="sous-titre-tdb">Prêt pour une nouvelle session ?</p>
+
+                {/* --- Cartes de navigation rapide vers les fonctionnalités principales --- */}
                 <Card className="carte-navigation" onClick={() => navigate("/cartes-filtres")}>
                     <div className="icone-carte-nav icone-cartes">🎴</div>
                     <div>
@@ -50,6 +52,8 @@ function TableauDeBord() {
                         <p className="sous-titre-carte-nav">Suivre ta progression</p>
                     </div>
                 </Card>
+
+                {/* Carte visible uniquement pour l'admin */}
                 {user?.est_admin && (
                     <Card className="carte-navigation" onClick={() => navigate("/admin")}>
                         <div className="icone-carte-nav icone-admin">⚙️</div>
@@ -61,6 +65,7 @@ function TableauDeBord() {
                 )}
             </div>
         </div>
-)};
+    )
+};
 
 export default TableauDeBord;
