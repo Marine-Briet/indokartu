@@ -13,7 +13,7 @@ const Mot = sequelize.define('Mot', {
     },
     forme: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true
     },
     traduction: {
         type: DataTypes.STRING(255),
