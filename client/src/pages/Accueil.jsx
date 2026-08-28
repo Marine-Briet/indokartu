@@ -11,13 +11,13 @@ function Accueil() {
 
     useEffect(() => {
         async function chargerMots() {
-            const reponse = await fetch("http://localhost:3000/api/mots");
+            const reponse = await fetch("http://192.168.1.65:3000/api/mots");
             const donnees = await reponse.json();
             setNombreMots(donnees.length);
         }
 
         async function chargerCategories() {
-            const reponse = await fetch("http://localhost:3000/api/categories");
+            const reponse = await fetch("http://192.168.1.65:3000/api/categories");
             const donnees = await reponse.json();
             setNombreCategories(donnees.length);
         }

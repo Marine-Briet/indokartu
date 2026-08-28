@@ -8,8 +8,8 @@
 
 // --- Carte d'affichage d'un mot ---
 .carte-mot {
-    padding: 16px 20px;
-    margin-bottom: 15px;
+    padding: 16px 10px;
+    margin-bottom: 6px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -33,5 +33,5 @@
 .mot-badges {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }

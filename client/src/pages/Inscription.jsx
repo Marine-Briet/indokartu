@@ -22,7 +22,7 @@ function Inscription() {
             return;
         }
 
-        const reponse = await fetch("http://localhost:3000/api/auth/inscription", {
+        const reponse = await fetch("http://192.168.1.65:3000/api/auth/inscription", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
@@ -48,7 +48,7 @@ function Inscription() {
                     <div className="carte-formulaire">
                         <div className="formulaire">
                             <p className="titre-formulaire-inscription">Inscription</p>
-                            <Champ label="Inscrire votre adresse mail" type="email" valeur={email} onChange={(e) => setEmail(e.target.value)} placeholder="votre adresse mail..." />
+                            <Champ label="Inscrivez votre adresse mail" type="email" valeur={email} onChange={(e) => setEmail(e.target.value)} placeholder="votre adresse mail..." />
                             <Champ label="Créez un mot de passe" type="password" valeur={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} placeholder="votre mot de passe..." />
                             <p className="mdp-aide">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (ex: !@#$%^&*)</p>
                             {message.texte && (

@@ -39,6 +39,10 @@
     transform: rotateY(180deg);
 }
 
+.sans-transition {
+    transition: none !important;
+}
+
 .face-recto,
 .face-verso {
     position: absolute;
