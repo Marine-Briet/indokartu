@@ -104,6 +104,11 @@ function Vocabulaire() {
         setCategoriesSelectionnees([]);
     }
 
+    
+    function categorieDisponible(id_categ) {
+        return mots.some((mot) => mot.id_categ === id_categ && typesSelectionnes.includes(mot.id_type));
+    }
+
     return (
         <div>
             <Header />
@@ -147,17 +152,24 @@ function Vocabulaire() {
                     </div>
                 </div>
                 <div className="filtres-categories">
-                    {categories.map((cat) => (
-                        <Bouton
-                        key={cat.id_categ}
-                        variant="filtre-categorie"
-                        couleur={cat.couleur_categ}
-                        actif={categoriesSelectionnees.includes(cat.id_categ)}
-                        onClick={() => toggleCategorie(cat.id_categ)}
-                        >
-                        {cat.nom_categ}
-                        </Bouton>
-                    ))}
+                    {categories
+                        .slice()
+                        .sort((a,b) => a.nom_categ.localeCompare(b.nom_categ))
+                        .map((cat) => {
+                        const disponible = categorieDisponible(cat.id_categ);
+                        return (
+                            <Bouton
+                                key={cat.id_categ}
+                                variant="filtre-categorie"
+                                couleur={cat.couleur_categ}
+                                actif={disponible && categoriesSelectionnees.includes(cat.id_categ)}
+                                onClick={disponible ? () => toggleCategorie(cat.id_categ) : undefined}
+                                className={!disponible ? "categorie-desactivee" : ""}
+                            >
+                                {cat.nom_categ}
+                            </Bouton>
+                        );
+                    })}
                 </div>
                 
                 {/*  COMPTEUR + LISTE DES MOTS FILTRÉS  */}

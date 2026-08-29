@@ -70,6 +70,11 @@ h1 {
     white-space: nowrap;
 }
 
+.categorie-desactivee {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 // FORMULAIRES : Connexion / Inscription
 
 .carte-formulaire {
@@ -100,7 +105,7 @@ h1 {
 
 .titre-formulaire-inscription,
 .titre-formulaire-connexion {
-    font-family: $font-principal;
+    font-family: $font-secondaire;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;

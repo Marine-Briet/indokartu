@@ -5,16 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 
-function Header({ simple = false}) {
+function Header({ simple = false }) {
   const [menuOuvert, setMenuOuvert] = useState(false);
-  const {deconnexion, user} = useAuth();
-  const navigate = useNavigate();;
+  const { deconnexion, user } = useAuth();
+  const navigate = useNavigate();
 
   function gererDeconnexion() {
     deconnexion();
     navigate("/");
   }
-  
 
   return (
     <header className="header">
@@ -32,12 +31,10 @@ function Header({ simple = false}) {
               {user?.est_admin && (
                   <NavLink to="/admin">Gérer les données</NavLink>
               )}
+              <button className="btn-deconnexion" onClick={gererDeconnexion}>Déconnexion</button>
             </nav>
 
-            <div className="header__droite">
-                <button className="btn-burger" onClick={() => setMenuOuvert(!menuOuvert)}>☰</button>
-                <button className="btn-deconnexion" onClick={gererDeconnexion}>Déconnexion</button>
-            </div>
+            <button className="btn-burger" onClick={() => setMenuOuvert(!menuOuvert)}>☰</button>
           </>
         )}
     </header>
