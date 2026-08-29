@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Bouton from "../components/Bouton";
 import { useNavigate } from "react-router-dom";
 import "./Accueil.scss";
+import { API_URL } from '../config';
 
 function Accueil() {
     const navigate = useNavigate();
@@ -11,13 +12,13 @@ function Accueil() {
     //  CHARGEMENT : chiffres réels affichés sur la page (mots/thèmes disponibles) 
     useEffect(() => {
         async function chargerMots() {
-            const reponse = await fetch("http://localhost:3000/api/mots");
+            const reponse = await fetch(`${API_URL}/api/mots`);
             const donnees = await reponse.json();
             setNombreMots(donnees.length);
         }
 
         async function chargerCategories() {
-            const reponse = await fetch("http://localhost:3000/api/categories");
+            const reponse = await fetch(`${API_URL}/api/categories`);
             const donnees = await reponse.json();
             setNombreCategories(donnees.length);
         }

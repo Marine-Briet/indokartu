@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './Inscription.scss';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { API_URL } from '../config';
 
 function Inscription() {
     const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ function Inscription() {
             return;
         }
 
-        const reponse = await fetch("http://localhost:3000/api/auth/inscription", {
+        const reponse = await fetch(`${API_URL}/api/auth/inscription`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

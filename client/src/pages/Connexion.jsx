@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Connexion.scss';
-
+import { API_URL } from '../config';
 
 function Connexion() {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Connexion() {
     async function gererConnexion(e) {
         e.preventDefault();
 
-        const reponse = await fetch("http://localhost:3000/api/auth/connexion", {
+        const reponse = await fetch(`${API_URL}/api/auth/connexion`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

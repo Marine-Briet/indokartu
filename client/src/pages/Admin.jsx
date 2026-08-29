@@ -4,7 +4,7 @@ import Bouton from "../components/Bouton"
 import Champ from "../components/Champ"
 import { useEffect, useState } from "react";
 import "./Admin.scss";
-
+import { API_URL } from '../config';
 
 function Admin() {
     // ÉTATS : données venant de l'API
@@ -43,19 +43,19 @@ function Admin() {
 
     // CHARGEMENT INITIAL : les 3 sources de données
     async function chargerMots() {
-        const reponse = await fetch("http://localhost:3000/api/mots");
+        const reponse = await fetch(`${API_URL}/api/mots`);
         const donnees = await reponse.json();
         setMots(donnees);
     }
 
     async function chargerCategories() {
-        const reponse = await fetch("http://localhost:3000/api/categories");
+        const reponse = await fetch(`${API_URL}/api/categories`);
         const donnees = await reponse.json();
         setCategories(donnees);
     }
 
     async function chargerTypes() {
-        const reponse = await fetch("http://localhost:3000/api/types-grammaticaux");
+        const reponse = await fetch(`${API_URL}/api/types-grammaticaux`);
         const donnees = await reponse.json();
         setTypes(donnees);
     }
@@ -113,7 +113,7 @@ function Admin() {
             id_type: formIdType
         };
 
-        let url = "http://localhost:3000/api/mots";
+        let url = `${API_URL}/api/mots`;
         let methode = "POST";
         const etaitEnEdition = !!motEnEdition;
 
@@ -183,12 +183,12 @@ function Admin() {
             nom_categ: formNomCateg
         };
 
-        let url = "http://localhost:3000/api/categories";
+        let url = `${API_URL}/api/categories`;
         let methode = "POST";
         const etaitEnEdition = !!categorieEnEdition;
 
         if (categorieEnEdition) {
-            url = `http://localhost:3000/api/categories/${categorieEnEdition.id_categ}`;
+            url = `${API_URL}//api/categories/${categorieEnEdition.id_categ}`;
             methode = "PUT";
         }
 
@@ -255,12 +255,12 @@ function Admin() {
             nom_type: formNomType
         };
 
-        let url = "http://localhost:3000/api/types-grammaticaux";
+        let url = `${API_URL}/api/types-grammaticaux`;
         let methode = "POST";
         const etaitEnEdition = !!typeEnEdition;
 
         if (typeEnEdition) {
-            url = `http://localhost:3000/api/types-grammaticaux/${typeEnEdition.id_type}`;
+            url = `${API_URL}0/api/types-grammaticaux/${typeEnEdition.id_type}`;
             methode = "PUT";
         }
 

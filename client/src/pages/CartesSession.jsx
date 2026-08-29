@@ -5,6 +5,7 @@ import Header from "../components/Header"
 import TagCategorie from "../components/TagCategorie";
 import { hexToRgba } from "../utils/colors";
 import "./CartesSession.scss";
+import { API_URL } from '../config';
 
 function CartesSession() {
     //  Données venant du Context (transmises depuis CartesFiltres) 
@@ -32,12 +33,12 @@ function CartesSession() {
     //  CHARGEMENT INITIAL : catégories/types 
     useEffect(() => {
         async function chargerCategories() {
-            const reponse = await fetch("http://localhost:3000/api/categories");
+            const reponse = await fetch(`${API_URL}/api/categories`);
             const donnees = await reponse.json();
             setCategories(donnees);
         }
         async function chargerTypes() {
-            const reponse = await fetch("http://localhost:3000/api/types-grammaticaux");
+            const reponse = await fetch(`${API_URL}/api/types-grammaticaux`);
             const donnees = await reponse.json();
             setTypes(donnees);
         }
@@ -95,7 +96,7 @@ function CartesSession() {
                 est_reussi: resultat.reussi
             }));
             const token = localStorage.getItem("token");
-            await fetch("http://localhost:3000/api/sessions", {
+            await fetch(`${API_URL}/api/sessions`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

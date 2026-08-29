@@ -4,7 +4,7 @@ import './Vocabulaire.scss';
 import TagCategorie from "../components/TagCategorie"
 import Header from "../components/Header"
 import Bouton from "../components/Bouton"
-
+import { API_URL } from '../config';
 
 function Vocabulaire() {
     //  ÉTATS : données venant de l'API 
@@ -20,19 +20,19 @@ function Vocabulaire() {
     //  CHARGEMENT INITIAL : les 3 appels API, une seule fois au montage du composant 
     useEffect(() => {
         async function chargerMots() {
-            const reponse = await fetch ("http://localhost:3000/api/mots");
+            const reponse = await fetch (`${API_URL}/api/mots`);
             const donnees =  await reponse.json();
             setMots(donnees);
         }
     
         async function chargerCategories() {
-            const reponse = await fetch ("http://localhost:3000/api/categories");
+            const reponse = await fetch (`${API_URL}/api/categories`);
             const donnees = await reponse.json();
             setCategories(donnees);
         }
     
         async function chargerTypes() {
-            const reponse = await fetch ("http://localhost:3000/api/types-grammaticaux");
+            const reponse = await fetch (`${API_URL}/api/types-grammaticaux`);
             const donnees = await reponse.json();
             setTypes(donnees);
         }

@@ -4,7 +4,7 @@ import Header from "../components/Header"
 import Card from "../components/Card";
 import Bouton from "../components/Bouton";
 import "./MesResultats.scss"
-
+import { API_URL } from '../config';
 
 function MesResultats() {
     const [stats, setStats] = useState(null);
@@ -16,7 +16,7 @@ function MesResultats() {
     useEffect(() => {
         async function chargerStats() {
             const token = localStorage.getItem("token");
-            const reponse = await fetch("http://localhost:3000/api/mes-resultats", {
+            const reponse = await fetch(`${API_URL}/api/mes-resultats`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 },
