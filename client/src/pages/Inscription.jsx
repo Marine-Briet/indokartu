@@ -12,6 +12,7 @@ function Inscription() {
     const [motDePasse, setMotDePasse] = useState("");
     const navigate = useNavigate();
     const [message, setMessage] = useState({texte: "", type: ""});
+    const [protectionOuvert, setProtectionOuvert] = useState(false);
 
     // Règle de validation du mot de passe 
     const regexMotDePasse = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
@@ -55,6 +56,19 @@ function Inscription() {
                             <Champ label="Inscrivez votre adresse mail" type="email" valeur={email} onChange={(e) => setEmail(e.target.value)} placeholder="votre adresse mail..." />
                             <Champ label="Créez un mot de passe" type="password" valeur={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} placeholder="votre mot de passe..." />
                             <p className="mdp-aide">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (ex: !@#$%^&*)</p>
+                            <button type="button" className="lien-aide" onClick={() => setProtectionOuvert(!protectionOuvert)}>
+                                Protection de mes données
+                            </button>
+                            {protectionOuvert && (
+                                <div className="modal-overlay" onClick={() => setProtectionOuvert(false)}>
+                                    <div className="modal-contenu" onClick={(e) => e.stopPropagation()}>
+                                        <button type="button" className="modal-fermer" onClick={() => setProtectionOuvert(false)}>✕</button>
+                                        <p className="modal-text">
+                                            IndoKartu collecte uniquement votre adresse email et votre mot de passe (stocké de façon sécurisée), ainsi que l'historique de vos sessions de révision, pour permettre le fonctionnement de votre compte et le suivi de votre progression. Ces données ne sont ni partagées ni transmises à des tiers.
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
 
                             {message.texte && (
                                 <p className={`message-formulaire message-formulaire--${message.type}`}>

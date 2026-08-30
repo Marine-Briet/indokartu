@@ -170,10 +170,10 @@ function CartesFiltres() {
                             <Bouton
                                 key={cat.id_categ}
                                 variant="ligne-categorie"
-                                couleur={cat.couleur_categ}
+                                couleur={disponible ? cat.couleur_categ : "#cccccc"}
                                 actif={disponible && categoriesSelectionnees.includes(cat.id_categ)}
                                 onClick={disponible ? () => toggleCategorie(cat.id_categ) : undefined}
-                                className={!disponible ? "categorie-desactivee" : ""}
+                                className={!disponible ? "categorie-desactivee" : (categoriesSelectionnees.includes(cat.id_categ) ? "" : "categorie-disponible")}
                             >
                                 {cat.nom_categ}
                             </Bouton>
