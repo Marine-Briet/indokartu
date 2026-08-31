@@ -1,6 +1,6 @@
 // Fichier central pour gérer les modèles et leurs associations
 
-const sequelize = require('../config/db_mysql.js');
+const sequelize = require('../config/db_postgres.js');
 const Utilisateur = require('./utilisateur');
 const Mot = require('./mot');
 const Categorie = require('./categorie');

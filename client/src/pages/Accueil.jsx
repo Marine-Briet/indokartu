@@ -35,8 +35,8 @@ function Accueil() {
                     <div className="carte-mystere carte-mystere--gauche">?</div>
                     <div className="carte-mystere carte-mystere--droite">?</div>
                     <div className="carte-vedette">
-                        <p className="drapeau-carte-vedette">🇮🇩 en indonésien</p>
-                        <p className="mot-carte-vedette">makan</p>
+                        <img width="24" height="24" src="https://img.icons8.com/color/48/indonesia-circular.png" alt="drapeau indonésien" className="drapeau"/>
+                        <p className="mot-carte-vedette">belajar</p>
                     </div>
                 </div>
 

@@ -108,7 +108,7 @@
 
 .mot-affiche {
     font-family: $font-secondaire;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: $c-texte-principal;
 }
 
@@ -150,7 +150,7 @@
 // Surcharges spécifiques au verso (le reste vient de main.scss : .mot-ligne, .mot-label, .mot-formes...)
 .face-verso .mot-racine {
     color: $c-accent;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 800;
 }
 

@@ -53,7 +53,7 @@ const getStatistiques = async (req, res) => {
         // 3.3 Compter combien de mots ont atteint le seuil de 10 (si >=10 --> mot maitrisé)
         const nombreMotsMaitrises = Object.values(compteurReussites).filter(r => r >=10).length;
 
-        // 3.4 Récupérer nb total de mot (via MySQL)
+        // 3.4 Récupérer nb total de mot (via Postgres)
         const nombreTotalMotsBase = await Mot.count();
         
         // 4. Top 10 des mots redoutés
