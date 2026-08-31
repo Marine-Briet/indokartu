@@ -16,19 +16,19 @@ app.use(cors());
 // Middleware pour passer le corps des requêtes en JSON
 app.use(express.json());
 
-// Import BDD MySQL et MongoDB
+// Import BDD Postgres et MongoDB
 const {sequelize} = require('./models/index');
 const mongoose = require('./config/db_mongo');
 
 
-// Test de connexion à la base de données MySQL et synchronisation des modèles
+// Test de connexion à la base de données Postgres et synchronisation des modèles
 sequelize.authenticate()
-.then(() => console.log('Connexion MySQL réussie !'))
-.catch((error) => console.error('Erreur de connexion MySQL :', error));
+.then(() => console.log('Connexion Postgres réussie !'))
+.catch((error) => console.error('Erreur de connexion Postgres :', error));
 
 sequelize.sync({ alter: true })
-.then(() => console.log('Modèles synchronisés avec la base de données MySQL'))
-.catch((error) => console.error('Erreur de synchronisation des modèles MySQL :', error));
+.then(() => console.log('Modèles synchronisés avec la base de données Postgres'))
+.catch((error) => console.error('Erreur de synchronisation des modèles Postgres :', error));
 
 // Route de test juste pour vérifier que l'API fonctionne
 app.get('/', (req, res) => {

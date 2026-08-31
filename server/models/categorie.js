@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db_mysql.js');
+const sequelize = require('../config/db_postgres.js');
 
 const Categorie = sequelize.define('Categorie', {
     id_categ: {

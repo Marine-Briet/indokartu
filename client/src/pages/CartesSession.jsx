@@ -140,7 +140,7 @@ function CartesSession() {
                                 {categorieActuelle && <TagCategorie couleur={categorieActuelle.couleur_categ}>{categorieActuelle.nom_categ}</TagCategorie>}
                             </div>
                             <div className="recto-contenu">
-                                <p className="drapeau-langue">{orientation === "fr-vers-id" ? "🇫🇷" : "🇮🇩"} en {orientation === "fr-vers-id" ? "français" : "indonésien"}</p>
+                                <p className="drapeau-langue">{orientation === "fr-vers-id" ? "" : ""} en {orientation === "fr-vers-id" ? "français" : "indonésien"}</p>
                                 <p className="mot-affiche">{texteRecto}</p>
                             </div>
                             <p className="instruction-carte">Appuyer pour voir la réponse</p>

@@ -188,7 +188,6 @@ function Vocabulaire() {
                                     <div className="mot-entete">
                                         <p className="mot-racine">{mot.racine}</p>
                                         <div className="mot-badges">
-                                            {type && <span className="badge-type">{type.nom_type.charAt(0).toUpperCase()}</span>}
                                             {categorie && <TagCategorie couleur={categorie.couleur_categ}>{categorie.nom_categ}</TagCategorie>}
                                         </div>
                                     </div>
