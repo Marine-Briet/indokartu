@@ -46,7 +46,7 @@ IndoKartu was born out of a personal need: after 6 months of learning Indonesian
 | Relational DB | MySQL + Sequelize (hosted on Aiven) | Structured, related data: users, words, categories, grammatical types |
 | NoSQL DB | MongoDB + Mongoose (hosted on MongoDB Atlas) | High-frequency, repetitive data: session history and per-word results (embedded, not a separate collection) |
 | Auth | JWT + bcrypt | Stateless authentication, hashed passwords, role-based access |
-| Hosting | Netlify (front) · Render (API) · Aiven (MySQL) · MongoDB Atlas (MongoDB) | Free-tier friendly, simple CI from GitHub |
+| Hosting | Netlify (front) · Render (API) · Neon (PostgreSQL) · MongoDB Atlas (MongoDB) | Free-tier friendly, simple CI from GitHub |
 
 ---
 
@@ -77,7 +77,7 @@ indokartu/
 
 ## 🔐 Data model
 
-### MySQL (relational)
+### PostgreSQL (relational)
 
 Four related entities:
 
@@ -184,7 +184,7 @@ The script imports types → categories → words, resolving category/type **nam
 
 | Service | Notes |
 |---|---|
-| **Aiven (MySQL)** | Requires SSL — Sequelize config needs `dialectOptions: { ssl: { require: true, rejectUnauthorized: false } }` |
+| **Neon (PostgreSQL)** | Requires SSL — Sequelize config needs `dialectOptions: { ssl: { require: true, rejectUnauthorized: false } }` |
 | **MongoDB Atlas** | Network Access must allow the deploying environment's IP (or `0.0.0.0/0` for simplicity). On some Windows/Node setups, `mongodb+srv://` DNS resolution can fail (`querySrv ECONNREFUSED`) even though the cluster is reachable — forcing Node's DNS servers (`dns.setServers(['8.8.8.8', '8.8.4.4'])`) resolved this in development |
 | **Render (API)** | Root directory: `server`. All `.env` variables must be re-entered as environment variables in the Render dashboard (the `.env` file itself is never pushed to GitHub) |
 | **Netlify (front)** | Base directory: `client`. Build command: `npm run build`. Publish directory: `client/dist` |
