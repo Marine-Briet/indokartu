@@ -43,7 +43,7 @@ IndoKartu was born out of a personal need: after 6 months of learning Indonesian
 | Front-end state | React Context API | Shared auth state (`AuthContext`) and shared session/filters state (`SessionContext`) without prop drilling |
 | Routing | React Router | `PrivateRoute` / `AdminRoute` / `RoutePublique` guard components |
 | Back-end | Node.js + Express | REST API, same language as the front-end |
-| Relational DB | MySQL + Sequelize (hosted on Aiven) | Structured, related data: users, words, categories, grammatical types |
+| Relational DB | PostgreSQL + Sequelize (hosted on Neon) | Structured, related data: users, words, categories, grammatical types |
 | NoSQL DB | MongoDB + Mongoose (hosted on MongoDB Atlas) | High-frequency, repetitive data: session history and per-word results (embedded, not a separate collection) |
 | Auth | JWT + bcrypt | Stateless authentication, hashed passwords, role-based access |
 | Hosting | Netlify (front) · Render (API) · Neon (PostgreSQL) · MongoDB Atlas (MongoDB) | Free-tier friendly, simple CI from GitHub |
@@ -94,7 +94,7 @@ Deleting a Categorie or TypeGrammatical is blocked server-side if any Mot still 
 // Collection: sessions
 {
   _id: ObjectId,
-  id_utilisateur: Integer,   // references Utilisateur.id_utilisateur in MySQL
+  id_utilisateur: Integer,   // references Utilisateur.id_utilisateur in PostgreSQL
   date_heure: Date,
   resultats: [
     { id_mot: Integer, est_reussi: Boolean }
@@ -105,7 +105,7 @@ Deleting a Categorie or TypeGrammatical is blocked server-side if any Mot still 
 
 Results are **embedded** in the session document rather than stored in a separate collection: they only ever exist in the context of one session, and are always read together (score calculation, end-of-session recap).
 
-> ⚠️ Cross-database consistency note: `id_utilisateur` and `id_mot` reference MySQL identifiers. MongoDB has no native way to enforce that these IDs actually exist — this integrity is guaranteed by the Express application layer, not by a database constraint.
+> ⚠️ Cross-database consistency note: `id_utilisateur` and `id_mot` reference PostgreSQL identifiers. MongoDB has no native way to enforce that these IDs actually exist — this integrity is guaranteed by the Express application layer, not by a database constraint.
 
 ---
 
@@ -113,7 +113,7 @@ Results are **embedded** in the session document rather than stored in a separat
 
 ### Prerequisites
 - Node.js 18+ (developed with Node 24)
-- A MySQL instance (local or remote)
+- A PostgreSQL instance (local or remote)
 - A MongoDB instance (local or remote)
 
 ### 1. Clone and install
@@ -136,16 +136,13 @@ npm install
 Create a `.env` file in `server/` (never committed — see `.gitignore`):
 
 ```env
-DB_HOST=
-DB_PORT=
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
+DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
 MONGO_URI=
 JWT_SECRET=
 ADMIN_PASSWORD=
 PORT=3000
 ```
+DATABASE_URL is the connection string provided by Neon (or any PostgreSQL instance).
 
 > The front-end has no `.env` — the API base URL is a plain constant in `client/src/config.js`, since it is not a secret value.
 
