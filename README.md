@@ -15,11 +15,11 @@ IndoKartu was born out of a personal need: after 6 months of learning Indonesian
 
 
 <p align="center">
-  <img src="docs/screenshots/accueil.jpg" alt="Home" width="160">
-  <img src="docs/screenshots/vocabulaire.jpg" alt="Vocabulary" width="160">
-  <img src="docs/screenshots/flashcard1.jpg" alt="Flashcard review" width="160">
-  <img src="docs/screenshots/flashcard2.jpg" alt="Flashcard review" width="160">
-  <img src="docs/screenshots/mes-resultats.jpg" alt="Personal statistics" width="160">
+  <img src="docs/screenshots/accueil.jpg" alt="Home" width="140">
+  <img src="docs/screenshots/vocabulaire.jpg" alt="Vocabulary" width="140">
+  <img src="docs/screenshots/flashcard1.jpg" alt="Flashcard review" width="140">
+  <img src="docs/screenshots/flashcard2.jpg" alt="Flashcard review" width="140">
+  <img src="docs/screenshots/mes-resultats.jpg" alt="Personal statistics" width="140">
 </p>
 
 ---
