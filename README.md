@@ -13,6 +13,15 @@ IndoKartu was born out of a personal need: after 6 months of learning Indonesian
 **Live demo:** https://indokartu.netlify.app
 **API base URL:** https://indokartu.onrender.com
 
+
+<p align="center">
+  <img src="docs/screenshots/accueil.jpg" alt="Home" width="250">
+  <img src="docs/screenshots/vocabulaire.jpg" alt="Lexique" width="250">
+  <img src="docs/screenshots/flashcard1.jpg" alt="Flashcard review" width="250">
+  <img src="docs/screenshots/flashcard2.jpg" alt="Flashcard review" width="250">
+  <img src="docs/screenshots/mes-resultats.jpg" alt="Personal statistics" width="250">
+</p>
+
 ---
 
 ## ✨ Features
@@ -162,7 +171,7 @@ The front-end runs on `http://localhost:5173`, the API on `http://localhost:3000
 
 ### 4. Create the admin account
 
-There is intentionally **no public way** to create an admin — it's a single, manually provisioned role:
+There is intentionally **no public way** to create an admin — it's a single, manually provisioned role.
 
 ### 5. Import the reference vocabulary (optional)
 
