@@ -134,3 +134,30 @@
 .boutons-accueil .bouton--cta {
     width: 100%;
 }
+
+//  Bouton "Essayer la démo" : contour, pour rester secondaire face aux deux CTA 
+.bouton-demo {
+    background: none;
+    border: 2px solid $c-accent;
+    color: $c-accent;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.bouton-demo:hover:not(:disabled) {
+    background-color: rgba($c-accent, 0.1);
+}
+
+.bouton-demo:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.message-attente {
+    font-size: 0.8rem;
+    color: $c-texte-secondaire;
+    max-width: 260px;
+}

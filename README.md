@@ -13,6 +13,14 @@ IndoKartu was born out of a personal need: after 6 months of learning Indonesian
 **Live demo:** https://indokartu.netlify.app
 **API base URL:** https://indokartu.onrender.com
 
+> 🔑 **Demo account** — click **"Essayer la démo"** on the home page, or sign in with:
+> - Email: `demo@indokartu.fr`
+> - Password: `Demo2026!`
+>
+> This is a learner account (no admin access). Email and password changes are disabled for it.
+
+> ⏳ **First load:** the API is hosted on Render's free tier and goes to sleep when unused. The first request can take **30 to 60 seconds** while the server wakes up — after that, the app responds normally.
+
 
 <p align="center">
   <img src="docs/screenshots/accueil.jpg" alt="Home" width="140">
@@ -77,8 +85,8 @@ indokartu/
     ├── controllers/           # Business logic per entity
     ├── models/                 # Sequelize + Mongoose models
     ├── routes/                   # Express routers per entity
-    ├── middlewares/                # checkJWT, checkAdmin
-    ├── scripts/                      # createAdmin, importerDonnees
+    ├── middlewares/                # checkJWT, checkAdmin, bloquerCompteDemo
+    ├── scripts/                      # createAdmin, createDemo, importerDonnees
     └── data/                           # Source CSV files (types, categories, words)
 ```
 
@@ -149,6 +157,8 @@ DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
 MONGO_URI=
 JWT_SECRET=
 ADMIN_PASSWORD=
+DEMO_EMAIL=demo@indokartu.fr
+DEMO_PASSWORD=
 PORT=3000
 ```
 DATABASE_URL is the connection string provided by Neon (or any PostgreSQL instance).
@@ -169,9 +179,17 @@ npm run dev
 
 The front-end runs on `http://localhost:5173`, the API on `http://localhost:3000`.
 
-### 4. Create the admin account
+### 4. Create the admin and demo accounts
 
 There is intentionally **no public way** to create an admin — it's a single, manually provisioned role.
+
+```bash
+cd server
+node scripts/createAdmin.js   # admin account (uses ADMIN_PASSWORD)
+node scripts/createDemo.js    # public demo account, always a learner (uses DEMO_EMAIL / DEMO_PASSWORD)
+```
+
+`createDemo.js` can be run again at any time: it resets the demo password and forces the learner role. The API blocks the demo account from changing its email or password (`403`, via the `bloquerCompteDemo` middleware), so the public credentials always keep working.
 
 ### 5. Import the reference vocabulary (optional)
 

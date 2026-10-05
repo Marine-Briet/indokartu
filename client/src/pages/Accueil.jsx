@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import Bouton from "../components/Bouton";
 import { useNavigate } from "react-router-dom";
 import "./Accueil.scss";
-import { API_URL } from '../config';
+import { API_URL, DEMO_EMAIL, DEMO_PASSWORD } from '../config';
+import { useAuth } from '../context/AuthContext';
 
 function Accueil() {
     const navigate = useNavigate();
     const [nombreMots, setNombreMots] = useState(0);
     const [nombreCategories, setNombreCategories] = useState(0);
+    const { connexion } = useAuth();
+    const [chargementDemo, setChargementDemo] = useState(false);
+    const [erreurDemo, setErreurDemo] = useState("");
 
     //  CHARGEMENT : chiffres réels affichés sur la page (mots/thèmes disponibles) 
     useEffect(() => {
@@ -26,6 +30,25 @@ function Accueil() {
         chargerMots();
         chargerCategories();
     }, []);
+
+    //  Appelée au clic sur "Essayer la démo" : connexion directe au compte démo 
+    async function connecterDemo() {
+        setChargementDemo(true);
+        setErreurDemo("");
+
+        try {
+            const reussi = await connexion(DEMO_EMAIL, DEMO_PASSWORD);
+            if (reussi) {
+                navigate("/tableau-de-bord");
+            } else {
+                setErreurDemo("Le compte démo est momentanément indisponible.");
+            }
+        } catch {
+            setErreurDemo("Le serveur ne répond pas, veuillez réessayer dans un instant.");
+        } finally {
+            setChargementDemo(false);
+        }
+    }
 
     return (
         <div>
@@ -58,7 +81,20 @@ function Accueil() {
                 <div className="boutons-accueil">
                     <Bouton variant="cta" onClick={() => navigate("/connexion")}>Se connecter</Bouton>
                     <Bouton variant="cta" onClick={() => navigate("/inscription")}>S'inscrire</Bouton>
+
+                    {/*  Accès démo pour les visiteurs (recruteurs), sans création de compte  */}
+                    <button type="button" className="bouton-demo" onClick={connecterDemo} disabled={chargementDemo}>
+                        {chargementDemo ? "Connexion..." : "Essayer la démo"}
+                    </button>
                 </div>
+
+                {/*  L'API gratuite sur Render peut mettre 30 à 60 s à se réveiller  */}
+                {chargementDemo && (
+                    <p className="message-attente">Le premier chargement peut prendre jusqu'à une minute (réveil du serveur).</p>
+                )}
+                {erreurDemo && (
+                    <p className="message-formulaire message-formulaire--erreur">{erreurDemo}</p>
+                )}
             </div>
         </div>
     )

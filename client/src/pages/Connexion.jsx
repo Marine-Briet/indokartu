@@ -3,15 +3,13 @@ import Champ from "../components/Champ";
 import Bouton from "../components/Bouton";
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Connexion.scss';
-import { API_URL } from '../config';
 
 function Connexion() {
     const navigate = useNavigate();
-    const { setUser } = useAuth();
+    const { connexion } = useAuth();
     const [email, setEmail] = useState("");
     const [motDePasse, setMotDePasse] = useState("");
     const [message, setMessage] = useState({texte: "", type: ""});
@@ -21,25 +19,18 @@ function Connexion() {
     async function gererConnexion(e) {
         e.preventDefault();
 
-        const reponse = await fetch(`${API_URL}/api/auth/connexion`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, mot_de_passe: motDePasse })
-        });
-
-        const donnees = await reponse.json();
-        if (reponse.ok) {
-            // Connexion réussie : token stocké, Context mis à jour, redirection
-            localStorage.setItem("token", donnees.token);
-            const decodage = jwtDecode(donnees.token);
-            setUser({ id_utilisateur: decodage.id_utilisateur, est_admin: decodage.est_admin });
-            setMessage({texte: "Connexion réussie! Redirection...", type: "succes"});
-            navigate("/tableau-de-bord");
-        } else {
-            // Message générique volontairement (pas de distinction email/mot de passe, pour la sécurité)
-            setMessage({ texte: "Email ou mot de passe incorrect", type: "erreur"});
+        try {
+            // La logique (appel API, token, Context) est dans AuthContext, partagée avec le bouton démo de l'accueil
+            const reussi = await connexion(email, motDePasse);
+            if (reussi) {
+                setMessage({texte: "Connexion réussie! Redirection...", type: "succes"});
+                navigate("/tableau-de-bord");
+            } else {
+                // Message générique volontairement (pas de distinction email/mot de passe, pour la sécurité)
+                setMessage({ texte: "Email ou mot de passe incorrect", type: "erreur"});
+            }
+        } catch {
+            setMessage({ texte: "Le serveur ne répond pas, veuillez réessayer dans un instant.", type: "erreur" });
         }
     }
 
